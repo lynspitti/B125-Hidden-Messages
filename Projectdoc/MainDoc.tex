@@ -1,8 +1,15 @@
 \documentclass[11pt]{article}
 \renewcommand{\baselinestretch}{1.20} 
-\usepackage[authoryear,round,longnamesfirst]{natbib}
 \usepackage[utf8]{inputenc}
 \usepackage[danish]{babel}
+
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+%\usepackage[nottoc]{tocbibind}
+%\usepackage[authoryear,round,longnamesfirst,nonamebreak]{natbib}
+%\bibliographystyle{dinat}
+
 \usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage{subcaption}
@@ -33,54 +40,62 @@
 \titlespacing*{\paragraph}
 {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
-\title{P2 - Hidden messages through the media \\ Gruppe: B-125}
+\title{
+    P2 - Hidden messages through the media 
+    \\ 
+    Gruppe: B-125
+    \\
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=0.8\textwidth, angle =0]{Projectdoc/Egg-Message.jpg}
+        \label{fig:robot}
+    \end{figure}
+}
 
 \author{
-    \\
     Udarbejdet af:\\
     \\
     Mikkel Steen Hansen\\
     Martin Boe\\
     Benjamin Jensen\\
     Daniel Jensen\\
-    \\
+    \\\\
     Vejleder:\\ 
     \\
     Rasmus Løvenstein Olsen\\
 }
-\date{\textbf{ 6. February 2018}}
+
+\date{\textbf{6. February 2018}}
 
 \begin{document}
+    \begin{titlepage}
+        \clearpage
+        \maketitle
+        \thispagestyle{empty}
+    \end{titlepage}
+    
+    \renewcommand{\baselinestretch}{0.8} 
+    \tableofcontents
+    \renewcommand{\baselinestretch}{1.20} 
+    
+    \newpage
+    
+    \input{Projectdoc/Introduction.tex}
+    
+    \input{Projectdoc/Problemanalyse.tex}
+    
+    \section{Skrald}
+        Instagram er en kogebog i 4 bind med masse af lækre desserter.
+        
+        There is a theory which states that if ever anyone discovers exactly what the Universe is for and why it is here, it will instantly disappear and be replaced by something even more bizarre and inexplicable.
+        There is another theory which states that this has already happened. \cite{knuthwebsite}
+    \newpage
 
-\begin{titlepage}
-\clearpage
-\maketitle
-\thispagestyle{empty}
-
-\end{titlepage}
-
-\renewcommand{\baselinestretch}{0.8} 
-\tableofcontents
-\renewcommand{\baselinestretch}{1.20} 
-\newpage
-
-\input{Projectdoc/Introduction.tex}
-
-Instagram er en kogebog i 4 bind med masse af lækre desserter.
-
-There is a theory which states that if ever anyone discovers exactly what the Universe is for and why it is here, it will instantly disappear and be replaced by something even more bizarre and inexplicable.
-There is another theory which states that this has already happened. \citep{adams1995hitchhiker2}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=1.7]{universe.jpg}
-\caption{The Universe}
-\label{fig:univerise}
-\end{figure}
-
-\section{Conclusion}
-``I always thought something was fundamentally wrong with the universe'' \citep{adams1995hitchhiker}
-
-\bibliographystyle{plain}
-\bibliography{references}
+    \input{Projectdoc/Konklusion.tex}
+    \newpage
+    
+    \printbibliography
+    
+    %\nocite{*}
+    %\bibliography{references}
 \end{document}
