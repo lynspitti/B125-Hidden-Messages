@@ -1,21 +1,18 @@
 \documentclass[11pt]{article}
 \renewcommand{\baselinestretch}{1.20} 
 \usepackage[utf8]{inputenc}
-\usepackage[danish]{babel}
-
-\usepackage{biblatex}
-\addbibresource{references.bib}
-
-%\usepackage[nottoc]{tocbibind}
-%\usepackage[authoryear,round,longnamesfirst,nonamebreak]{natbib}
-%\bibliographystyle{dinat}
-
+\usepackage[danish]{babel}\addto\captionsenglish  
+{\renewcommand{\bibname}{References}}  
+\usepackage[backend=biber,style=numeric,sorting=ynt,block=par]{biblatex}
+\usepackage{url}
+\usepackage{csquotes}
 \usepackage{graphicx}
 \usepackage{subfigure}
-\usepackage{subcaption}
+%\usepackage{subcaption}
 \usepackage{pdfpages}
 \usepackage{caption}
 \usepackage{geometry}
+\usepackage{float}
  \geometry{
  a4paper,
  total={170mm,237mm},
@@ -48,7 +45,7 @@
     \begin{figure}[!h]
         \centering
         \includegraphics[width=0.8\textwidth, angle =0]{Projectdoc/Egg-Message.jpg}
-        \label{fig:robot}
+        \label{fig:FrontPage}
     \end{figure}
 }
 
@@ -66,6 +63,8 @@
 }
 
 \date{\textbf{6. February 2018}}
+
+\addbibresource{references.bib}  
 
 \begin{document}
     \begin{titlepage}
@@ -88,14 +87,11 @@
         Instagram er en kogebog i 4 bind med masse af lækre desserter.
         
         There is a theory which states that if ever anyone discovers exactly what the Universe is for and why it is here, it will instantly disappear and be replaced by something even more bizarre and inexplicable.
-        There is another theory which states that this has already happened. \cite{knuthwebsite}
+        There is another theory which states that this has already happened.
     \newpage
 
     \input{Projectdoc/Konklusion.tex}
     \newpage
-    
+
     \printbibliography
-    
-    %\nocite{*}
-    %\bibliography{references}
 \end{document}
