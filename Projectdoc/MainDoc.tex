@@ -3,16 +3,21 @@
 \usepackage[utf8]{inputenc}
 \usepackage[danish]{babel}\addto\captionsenglish  
 {\renewcommand{\bibname}{References}}  
-\usepackage[backend=biber,style=numeric,sorting=ynt,block=par]{biblatex}
+%\usepackage[backend=biber,style=numeric,sorting=ynt,block=par]{biblatex}
+
+% Getting packages
+\usepackage[superscript,biblabel]{cite}
 \usepackage{url}
 \usepackage{csquotes}
 \usepackage{graphicx}
-\usepackage{subfigure}
-%\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{subcaption}
 \usepackage{pdfpages}
 \usepackage{caption}
 \usepackage{geometry}
 \usepackage{float}
+\usepackage{lastpage}
+
  \geometry{
  a4paper,
  total={170mm,237mm},
@@ -20,6 +25,12 @@
  top=30mm,
  }
 \usepackage{fancyhdr}
+
+% Defining colors
+\definecolor{aaublue}{RGB}{33,26,82}
+
+% Include AAU titlepage command
+\input{Projectdoc/Assets/aau-titelblad-cmd.tex}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -64,34 +75,46 @@
 
 \date{\textbf{6. February 2018}}
 
-\addbibresource{references.bib}  
+%\addbibresource{references.bib}  
 
 \begin{document}
+    % Forside
     \begin{titlepage}
         \clearpage
         \maketitle
         \thispagestyle{empty}
     \end{titlepage}
     
+    % Titelblad
+    \input{Projectdoc/Titelblad.tex}
+    
+    % Indholdsfortegnelse
     \renewcommand{\baselinestretch}{0.8} 
     \tableofcontents
     \renewcommand{\baselinestretch}{1.20} 
-    
     \newpage
     
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Rapport struktur
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    % Indledning
     \input{Projectdoc/Introduction.tex}
-    
+    % Problemanalyse
     \input{Projectdoc/Problemanalyse.tex}
+    % Problemafgrænsning
+    \input{Projectdoc/Problemafgraensning.tex}
+    % Problemformulering
+    \input{Projectdoc/Problemformulering.tex}
+    % Metode
+    \input{Projectdoc/Metode.tex}
     
-    \section{Skrald}
-        Instagram er en kogebog i 4 bind med masse af lækre desserter.
-        
-        There is a theory which states that if ever anyone discovers exactly what the Universe is for and why it is here, it will instantly disappear and be replaced by something even more bizarre and inexplicable.
-        There is another theory which states that this has already happened.
-    \newpage
-
+    %Konklusion
     \input{Projectdoc/Konklusion.tex}
+    
     \newpage
-
-    \printbibliography
+    %\printbibliography
+    
+    \bibliographystyle{unsrt}
+    \bibliography{references}
 \end{document}
