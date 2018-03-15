@@ -2,8 +2,8 @@
 \renewcommand{\baselinestretch}{1.20} 
 \usepackage[utf8]{inputenc}
 \usepackage[danish]{babel}\addto\captionsenglish  
-{\renewcommand{\bibname}{References}}  
-%\usepackage[backend=biber,style=numeric,sorting=ynt,block=par]{biblatex}
+{\renewcommand{\bibname}{References}}
+\setlength\parindent{0pt} % No indent command
 
 % Getting packages
 \usepackage[superscript,biblabel]{cite}
@@ -17,19 +17,14 @@
 \usepackage{geometry}
 \usepackage{float}
 \usepackage{lastpage}
-
- \geometry{
- a4paper,
- total={170mm,237mm},
- left=20mm,
- top=30mm,
- }
 \usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
 
-% Defining colors
+% Other
+\geometry{a4paper, total={170mm,237mm}, left=20mm, top=30mm}
 \definecolor{aaublue}{RGB}{33,26,82}
-
-% Include AAU titlepage command
 \input{Projectdoc/Assets/aau-titelblad-cmd.tex}
 
 \pagestyle{fancy}
@@ -37,9 +32,7 @@
 \rhead{Social hidden Messages 2018}
 \lhead{Gruppe: B-125}
 \chead{P2 - Rapport}
-\rfoot{Page \thepage}
-
-\usepackage{titlesec}
+\rfoot{Side \thepage}
 
 \setcounter{secnumdepth}{4}
 
@@ -68,12 +61,13 @@
     Benjamin Jensen\\
     Daniel Jensen\\
     \\\\
-    Vejleder:\\ 
+    Vejledere:\\ 
     \\
     Rasmus Løvenstein Olsen\\
+    Julie Rafn Abildgaard\\
 }
 
-\date{\textbf{6. February 2018}}
+\date{\textbf{\today}}
 
 %\addbibresource{references.bib}  
 
@@ -108,7 +102,6 @@
     \input{Projectdoc/Problemformulering.tex}
     % Metode
     \input{Projectdoc/Metode.tex}
-    
     %Konklusion
     \input{Projectdoc/Konklusion.tex}
     
