@@ -7,10 +7,11 @@
 \usepackage{subcaption}
 \usepackage{geometry}
 \usepackage{xcolor}
+\usepackage{float}
 \usepackage{mdframed}
 \usepackage{booktabs}% http://ctan.org/pkg/booktabs
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
-\geometry{a4paper, total={170mm,237mm}, left=20mm, top=30mm}
+\geometry{a4paper, total={170mm,237mm}, left=20mm, top=20mm}
 \setlength{\abovecaptionskip}{15pt plus 3pt minus 2pt}
 
 \begin{document}
@@ -30,16 +31,18 @@
     % Questionnaire description
     \input{InteraktionsDesign/Docs/Questionnaire.tex}
     
-    % Questionnaire survey
-    \input{InteraktionsDesign/Docs/Survey.tex}
-    
     % Survey conduction
-    \input{InteraktionsDesign/Docs/Conduction.tex}
+    %\input{InteraktionsDesign/Docs/Conduction.tex}
     
+    \newpage
     % Survey findings
     \input{InteraktionsDesign/Docs/Findings.tex}
-    
+
     % Requirements
     \input{InteraktionsDesign/Docs/Requirements.tex}
+    
+    \newpage
+    % Appendix
+    \input{InteraktionsDesign/Docs/Appendix.tex}
 
 \end{document}
