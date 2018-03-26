@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1522071844 source:c:\users\mikke\documents\github\b125-hidden-messages\workeshop_1_code\workshop1\main.cpp
+	<iostream>
+	<Login.h>
+
+1522072359 source:c:\users\mikke\documents\github\b125-hidden-messages\workeshop_1_code\workshop1\src\login.cpp
+	"Login.h"
+	"string.h"
+	<iostream>
+
+1522070388 c:\users\mikke\documents\github\b125-hidden-messages\workeshop_1_code\workshop1\include\login.h
+	<iostream>
+
