@@ -1,6 +1,9 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 #include <iostream>
+#include "string.h"
+
+using namespace std;
 
 class Login
 {
@@ -10,8 +13,8 @@ class Login
         bool CheckLogin(char *UserName, char *PassWord);
         bool CheckIfBlocked(char *IP);
         void BlockConnection();
+        void ShowWelcomeScreen();
         void ReadSystem();
-        int Attempts;
     protected:
 
     private:

@@ -1,18 +1,15 @@
-#include "Login.h"
+#include "../include/Login.h"
 #include "string.h"
 #include <iostream>
+
 using namespace std;
 
-int Attempts = 0;
 char *Connection;
-
-
-//System information....
 char *_syspath;
 char *_Username;
 char *_Password;
 char *_BlockedIP;
-//...................
+
 Login::Login(char *SysPath, char *IP)
 {
     Connection = IP;
@@ -36,13 +33,13 @@ bool Login::CheckIfBlocked(char *IP)
 bool Login::CheckLogin(char *UserName, char *PassWord)
 {
     if (strcmp(UserName,_Username) == 0){
-        if (strcmp(PassWord,_Password) == 0){
+        if (strcmp(PassWord,_Password) == 0)
             return true;
-        }
-        else{
+        else
             return false;
-        }
     }
+    else
+        return false;
 }
 void Login::BlockConnection()
 {
@@ -53,9 +50,16 @@ Login::~Login()
     //dtor
 }
 
+void Login::ShowWelcomeScreen(){
+    cout << "Welcome!" << endl;
+    cout << "Please select an action:" << endl;
+    cout << "- Display local data" << endl;
+    cout << "- Settings" << endl;
+}
+
 void Login::ReadSystem(char *path)
 {
-    _Username = "Tester";
+    _Username = "Teer";
     _Password = "Pass";
     _BlockedIP = "1.1";
 }
