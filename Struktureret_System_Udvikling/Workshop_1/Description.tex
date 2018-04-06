@@ -1,0 +1,81 @@
+\section{Usecase beskrivelse}
+
+\begin{tabular}{@{}p{3.5cm}@{}p{13cm}@{}}
+    Use Case & \#1. Vis data \\
+    Description & 
+    Bruger(nes) tilgang til systemes, hvor alt samlet data fra systemet tilkoblede sensore kan vises.\\
+    Assumtions & 
+    Det er antaget at Brugerne og systemet har tilgang til nettet.\\&
+    At Usecase \#3 [Samle data] er accepteret,\\&
+    og at hovedmodulet har gennemgået en første gangs opsætning.\\
+    Actors & 
+    Brugere af systemet, med tilgang fra enten app, eller net forbindelse \\
+    Steps & For visning af data skal brugeren:
+    \begin{enumerate}
+        \item forbinde til systemet med app.
+        \item Vælge at se målte sensor data fra hovedmenu.
+    \end{enumerate} \\&
+    Systemet gennemgår herefter:
+    \begin{enumerate}
+        \item At hente lokalt gemt data fra sensor(ene)
+        \item Fremvise dataen i app for brugeren.
+    \end{enumerate}\\
+    Variations & 
+    Forskellige layouts alt efter antal af tilkoblede sensorer.\\&
+    Responsivedesign for mobil, tablet og computer.\\
+    Non-Funtional & 
+    \tabitem Brugeren kan kun se de nyeste beregnede informationer.\\&
+    \tabitem Brugeren skal ikke kunne redigere eller på anden måde manipulere, lokalt data.
+\end{tabular}
+\\\\
+
+\noindent
+\begin{tabular}{@{}p{3.5cm}@{}p{13cm}@{}}
+    Use Case & \#2. Login \\
+    Description &  
+    Denne use case skal bruges for at kunne identificere sig over for systemet som installatør. Formålet med dette er at afskærme brugeren fra funktioner som ikke skal bruges i hverdagen.\\
+    Assumtions &  
+    Det er antaget at systemet er tilkoblet både strøm og internet\\
+    Actors & 
+    Installatør af systemet, med tilgang fra en lokal computer.\\
+    Steps & 
+    \begin{enumerate}
+        \item Installatør bedes om login detaljer
+        \item Systemet verificerer login detaljer
+        \item Ved godtagelse sendes installatør til konfigurationsmenu.
+    \end{enumerate}\\
+    Variations & 
+    Systemet har ikke gennem gået en første gangs opsætning, og kræver derfor opsætnings wizzard.
+    Forbindelsen findes spæret, forsøg på uautoriseret adgang.\\
+    Non-Functional &
+    Login efter første gangs opsætning, skal ikke findes nødvendigt.\\ &
+    Efter 5 mislykkedes login forsøg, vil forbindelsen blive spæret.
+\end{tabular}
+\\\\
+
+\noindent
+\begin{tabular}{@{}p{3.5cm}@{}p{13cm}@{}}
+    Use Case & \#3. Samle data \\
+    Description & 
+    Denne use case skal indsamle data fra de tilgængelige sensorer samt DMIs database. Formålet med dette er, at gøre denne data tilgængelig for andre use cases, så som Use case \#1. (Vis data).\\
+    Assumptions & 
+    Det er antaget at use casen "Konfigurering" er gennemført samt at "Kalibrering af sensorer" use casen er gennemført for alle tilkoblet sensorer. Det antages dernæst også at systemet har tilgang til internettet.\\
+    Actors & 
+    Denne use case involverer to aktører, de tilkoblet sensorer og DMIs database.\\
+    Steps & 
+    Gentages hvert femte minut:
+    \begin{enumerate}
+        \item Sensorer kontaktes for data udlæsning
+        \item Udlæst data gemmes i lokal database
+    \end{enumerate}\\ &
+    Gentages hvert kvarter:
+    \begin{enumerate}
+        \item DMIs database kontaktes for lokal vejr opdatering
+        \item Ny data sammenlignes med gammel data i lokal database.
+        \item Ny data overskriver gammel data, hvis de to ikke er ens.
+    \end{enumerate}\\ 
+    Variations & 
+    DMI er ikke tilgængelig.\\
+    Non-Functional & 
+    Systemet skal kunne fortsat operere i lokal tilstand hvis DMIs database ikke kan kontaktes\\
+\end{tabular}

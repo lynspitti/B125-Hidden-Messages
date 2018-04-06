@@ -1,27 +1,14 @@
-A. Brugeren, Instalatør, alle sensorene og DMI.
-En bruger kan altid se indsamlet data, fra enten Sensorene i produktet eller DMI.
-
-En Instalatør vil blive spurgt for en administrator kode inden vedkomende vil få adgang til administrerende settings, så som kalibrering eller data manipulation.
-
-En sensor kan tilgå systemet og tilføje sensor data.
-
-Produktet henter og opdatere data fra DMI hver 15 miniut.
-
-B. Bruger og administrator.
-
-
-%------------------------------------
-\section{Usecase beskrivelse}
-\begin{figure}
+\section{Project Usecase Diagram}
+\begin{figure}[H]
     \centering
-    \includegraphics{}
-    \caption{Caption}
+    \includegraphics[width=0.8\linewidth, height=8.5cm]{Struktureret_System_Udvikling/Workshop_1/Assets/IoT_weather_station.png}
+    \caption{Usecase Diagram}
     \label{fig:my_label}
 \end{figure}
 Systemet indeholder som usecase diagrammet anviser fire forskellige aktører:\\
 En bruger, der kan få vist den indsamlede data, gennem en af de to mulige grænseflader, for henholdsvis den samlede Sensor data, eller den lokale udsigt opdateret fra DMI.\\
-En installatør, der gennem en netbaseret forbindelse kan loggein i systemet, for efterfølgende at administrer produktet, ved f.eks. opsætning eller omkonfigurering, sensor kalibrering, eller datamanipulation.\\
-En rakke sensorer der bidrager med forskellige målte data til systemets lokale information, som senere kan fremvises til brugeren.\\
+En installatør, der gennem en netbaseret forbindelse kan loggein i systemet, for efterfølgende at administrere produktet, ved f.eks. opsætning eller omkonfigurering, sensor kalibrering, eller datamanipulation.\\
+En række sensorer der bidrager med forskellige målte data til systemets lokale information, som senere kan fremvises til brugeren.\\
 Og en tilgang til DMI's kommende vejrudsigt, der bliver opdateret for brugerens oplevelse.
 \\\\
 \noindent
@@ -31,3 +18,5 @@ Installerer produktet i sit hjem ved hjælp af den medfølgende manual, og op-ko
 Efterfølgende kan brugeren tilgå hovedmodulet gennem dens uddelte lokale ipaddresse, fra f.eks. en lokal computer.\\
 Igennem denne forbindelse til hovedmodulets, vil brugeren blive guidet gennem en førstegangs opsætnings wizzard.\\
 Her efter kan denne forbindelse også bestyres eller konfigurere gennem denne samme tilgang.
+Hvis enkelte sensorer skulle blive beskadiget, kan enkelte sensorer købes fra producenten.
+Et produkt kan altid manuelt gensættes til fabriks indstillinger.
