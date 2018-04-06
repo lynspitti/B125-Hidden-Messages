@@ -12,7 +12,7 @@
 \usepackage{hyperref}
 \usepackage{subcaption}
 \usepackage{pdfpages}
-\usepackage{caption}
+\usepackage[labelfont=bf,labelsep=quad,font={small,it}]{caption}
 \usepackage{geometry}
 \usepackage{float}
 \usepackage{lastpage}
@@ -23,6 +23,9 @@
 \graphicspath{ {Projectdoc/Problemanalyse/Illustrationer/} }
 \usepackage{wrapfig}
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-\do_}
 
 % Other
 \geometry{a4paper, total={170mm,237mm}, left=20mm, top=30mm}
@@ -68,7 +71,6 @@
     Rasmus Løvenstein Olsen\\
     Julie Rafn Abildgaard\\
 }
-
 \date{\textbf{\today}}
 
 %\addbibresource{references.bib}  
@@ -93,23 +95,30 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Rapport struktur
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+    
+    % Læsevejledning
+    %\input{Projectdoc/Instructions.tex}
+    
     % Indledning
     \input{Projectdoc/Introduction.tex}
+    
     % Problemanalyse
     \input{Projectdoc/Problemanalyse.tex}
+    
     % Problemafgrænsning
     \input{Projectdoc/Problemafgraensning.tex}
+    
     % Problemformulering
     \input{Projectdoc/Problemformulering.tex}
+    
     % Metode
     \input{Projectdoc/Metode.tex}
+    
     %Konklusion
     \input{Projectdoc/Konklusion.tex}
     
+    % Litteratur
     \newpage
-    %\printbibliography
-    
     \bibliographystyle{unsrt}
     \bibliography{references}
 \end{document}
