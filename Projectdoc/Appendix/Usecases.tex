@@ -1,0 +1,124 @@
+\subsection{Usecases}
+\subsubsection{Usecase 1: Login \label{Usecase1_Login}}
+\begin{tabular}{@{}p{3.5cm}@{}p{13cm}@{}}
+    Usecase funktion & 
+    \#1. Login \\
+    Beskrivelse & 
+    Brugerne logger ind på kommunikationsplatformen på to måder: via platformens offentlige anonyme bots eller via brugeren egen socialemedie konto.\\
+    Antagelser & 
+    Det antages at:
+    \begin{itemize}
+        \item Brugeren er i besiddelse af en konto på et af de understøttede socialemedier, såfremt den personlige post funktion skal bruges.
+    \end{itemize} \\
+    Aktøre & 
+    \textbf{Sender} og \textbf{Modtager}, der autentificerer sig via et \textbf{Socialt medie}.\\
+    Fremgangsmetode &
+    \begin{enumerate}
+        \item Brugeren naviger hen til kommunikationsplatformens loginmuligheder.
+        \item Brugeren bliver nu stillet to muligheder:
+        \begin{enumerate}
+            \item Login via egen konto.
+            \begin{enumerate}
+                \item Brugeren bliver navigeret hen til det sociale medies loginside.
+                \item Brugeren udfylder nu sine oplysninger.
+                \item Brugeren bliver nu navigeret hen til kommunikationsplatformens velkomstside, med loginoplysningerne fra det sociale medie.
+            \end{enumerate}
+            \item Login via offentlig konto.
+                \begin{enumerate}
+                    \item Brugeren bliver navigeret direkte hen til kommunikationsplatformens velkomstside.
+                \end{enumerate}
+        \end{enumerate}
+    \end{enumerate} \\
+    Variationer & 
+    - \\
+    Issues &
+    \begin{itemize}
+        \item Hele loginfunktionen er afhængig af en tredjepart. Hvilket kan have effekt på oppetid og adgang.
+    \end{itemize} \\
+    Ikke-funktionelle krav & 
+    -
+\end{tabular}
+\subsubsection{Usecase 2: Send message \label{Usecase2_Send_Message}}
+\begin{tabular}{@{}p{3.5cm}@{}p{13cm}@{}}
+    Usecase funktion & 
+    \#2. Send besked \\
+    Beskrivelse & 
+    Brugere, der er logget ind i systemet, kan sende skjulte beskeder gennem et socialtmedie. \\
+    Antagelser & 
+    Det antages at:
+    \begin{itemize}
+        \item Brugeren har gennemført usecase \#1. "Login".
+    \end{itemize}\\
+    Aktøre & 
+    \textbf{Sender} \\
+    Fremgangsmetode &
+    \begin{enumerate}
+        \item Brugeren naviger hen til kommunikationsplatformens Textformidlings mulighede.
+        \item Brugeren vælger et passende forum til sin besked.
+        \item Brugeren vælger en tråd, hvor i brugeren vil vedlægge en besked, eller opretter en ny.
+        \item Brugeren bliver bedt om at skrive sin besked.
+        \item Systemet kryptere brugerens besked, til at ligne et billedes kildekode.
+        \item Systemet indopererer beskeden i et billedes kildekode.
+        \item Systemet poster beskeden i et offentligt socialt medie.
+    \end{enumerate} \\
+    Variationer & 
+    - \\
+    Issues &
+    \begin{itemize}
+        \item Brugeren har mistet sin forbindelse.
+    \end{itemize}\\
+    Ikke-funktionelle & 
+    -
+\end{tabular}
+\subsubsection{Usecase 3: View message \label{Usecase3_View_Message}}
+\begin{tabular}{@{}p{3.5cm}@{}p{13cm}@{}}
+    Usecase funktion & 
+    \#3. Se besked \\
+    Beskrivelse & 
+    Brugere, der er logget in i systemet, kan se tidligere sendte beskeder, også fra andre brugere. \\
+    Antagelser & 
+    Det antages at:
+    \begin{itemize}
+        \item Brugeren har gennemført usecase \#1. "Login".
+        \item usecase #2. "Send message" tidligere har været udført, inden for den aktuelle brugeres tilgang og rettigheder til display af beskeder.
+    \end{itemize}\\
+    Aktøre & 
+    \textbf{Modtager} \\
+    Fremgangsmetode &
+    \begin{enumerate}
+        \item -
+    \end{enumerate} \\
+    Variationer & 
+    - \\
+    Issues &
+    Brugeren har mistet sin forbindelse. \\
+    Ikke-funktionelle & 
+    -
+\end{tabular}
+\subsubsection{Usecase 4: Delete message\label{Usecase4_Delete_Message}}
+\begin{tabular}{@{}p{3.5cm}@{}p{13cm}@{}}
+    Usecase funktion & 
+    \#4. Slet besked \\
+    Beskrivelse & 
+    Brugere, der er logget in i systemet, kan slette tidligere sendte beskeder, inden for den aktuelle brugeres tilgang og rettigheder til enkelte beskeder.\\
+    Antagelser & 
+    Det antages at:
+    \begin{itemize}
+        \item Brugeren har gennemført usecase \#1. "Login".
+        \item usecase #2. "Send message" tidligere har været udført, inden for den aktuelle brugeres tilgang og rettigheder til enkelte beskeder.
+    \end{itemize}\\
+    Aktøre & 
+    \textbf{Sender} \\
+    Fremgangsmetode &
+    \begin{enumerate}
+        \item -
+    \end{enumerate} \\
+    Variationer & 
+    - \\
+    Issues & 
+    \begin{itemize}
+        \item Brugeren har mistet sin forbindelse.
+    \end{itemize}\\
+    Ikke-funktionelle & 
+    -
+\end{tabular}

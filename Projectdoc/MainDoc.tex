@@ -6,31 +6,29 @@
 \setlength\parindent{0pt} % No indent command
 
 % Getting packages
+\usepackage[labelfont=bf,labelsep=quad,font={small,it}]{caption}
 \usepackage[superscript,biblabel]{cite}
-\usepackage{url}
+\usepackage{subcaption}
 \usepackage{csquotes}
 \usepackage{hyperref}
-\usepackage{subcaption}
 \usepackage{pdfpages}
-\usepackage[labelfont=bf,labelsep=quad,font={small,it}]{caption}
 \usepackage{geometry}
-\usepackage{float}
 \usepackage{lastpage}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
-\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\usepackage{mdframed}
+\usepackage{booktabs}
 \usepackage{graphicx}
-\graphicspath{ {Projectdoc/Problemanalyse/Illustrationer/} }
 \usepackage{wrapfig}
-\newcommand{\tabitem}{~~\llap{\textbullet}~~}
-
+\usepackage{float}
 \usepackage{url}
-\def\UrlBreaks{\do\/\do-\do_}
 
 % Other
 \geometry{a4paper, total={170mm,237mm}, left=20mm, top=30mm}
 \definecolor{aaublue}{RGB}{33,26,82}
 \input{Projectdoc/Assets/aau-titelblad-cmd.tex}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\def\UrlBreaks{\do\/\do-\do_}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -97,7 +95,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     % Læsevejledning
-    %\input{Projectdoc/Instructions.tex}
+    \input{Projectdoc/Instructions.tex}
     
     % Indledning
     \input{Projectdoc/Introduction.tex}
@@ -111,14 +109,23 @@
     % Problemformulering
     \input{Projectdoc/Problemformulering.tex}
     
+    % Kravspecifikation
+    \newpage
+    \input{Projectdoc/Kravspecifikation.tex}
+    
     % Metode
     \input{Projectdoc/Metode.tex}
     
     %Konklusion
     \input{Projectdoc/Konklusion.tex}
     
-    % Litteratur
+    % Litteraturliste
     \newpage
     \bibliographystyle{unsrt}
     \bibliography{references}
+    
+    % Appendix
+    \newpage
+    \section{Appendix}
+    \input{Projectdoc/Appendix/Usecases.tex}
 \end{document}
