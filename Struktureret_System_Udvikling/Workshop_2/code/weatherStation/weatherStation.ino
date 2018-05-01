@@ -1,7 +1,7 @@
 class Measurement_Module {
   virtual Get_Measurement();
 };
-// one two testing GitHubDesktop
+
 class Temp_Measurement : public Measurement_Module {
   virtual Get_Measurement();
   Data_Struct Get_Measurement(){
