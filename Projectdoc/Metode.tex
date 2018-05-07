@@ -7,8 +7,14 @@
     \label{fig:sysdiagram}
 \end{figure}
 
-Systemet beskrevet ved [Figur \ref{fig:sysdiagram}] er hovedsageligt designet efter et User Activated Action Event Flow. 
-Dette vil sige at alle systemets aktiviteter er baseret på en brugers aktive handlinger, og kan derved styres fra et centralt sted. Her tales om enten brugerens egen enhed, eller en central system server, der kun responderer på brugerens kommandoer.
+I systemets handlings diagram ovenfor [Figur \ref{fig:sysdiagram}] ses produktets overordnede handlingsflow. Diagrammet er ikke en endelig eller færdig udarbejdelse, men skabt til at give et letforståeligt overblik over systemets indhold, nødvendige resurse behov, samt mulige anvendte teknologier. Ud fra diagrammets flow, med start fra den sorte cirkel i toppen, kan der som et eksempel ses, at systemet anses for at skulle have tilgang til en Database, indeholdende mulige Bot associeringer til en brugeres login, eller en tilgang til det anvendte sociale medies API for samme.\\
+I dette eksempel er f.eks. ikke videre beskrevet hvordan, eller om systemet overhovedet skal, håndtere denne databases placering eller tilgang, efter en eventuel spærring fra tredjeparter, der f.eks. kunne anse systemet for at understøtte maliciøse aktiviteter.\\
+Efter denne login aktivitet ses hovedmenuen, hvorfra brugerne kan vælge at f.eks. tilgå systemets indstillinger, danne en ny besked, eller hente tidligere beskeder og tråde. Denne lægger også op til et andet dilemma omhandlende hvordan systemet, uden at skabe en større række af mistænkelige forespørgsler, skal kunne genkende, hente, og sammekæde flere beskeder på op til flere mulige brugere kontoer, hvilket efter simple normale requests vil kræve op til måske flere hundrede transmissioner per request.\\
+Senere i dette afsnit vil disse føromtalte dilemmaer såvel som, teorier og tanker blandt andre blive videre redegjort for, med henblik på at skabe et endeligt oplæg til en række tekniske læsningsforslag.
+
+\\\\
+Systemet beskrevet ved [Figur \ref{fig:sysdiagram}] er hovedsageligt designet efter et User Activity Action Event Flow. 
+Dette vil sige at alle systemets aktiviteter er baseret på en brugers aktive handlinger, og kan derved styres fra et centralt sted. Her tales om enten brugerens egen enhed, eller en central system server, der ikke fortager andre handlinger end at responderer klart på en brugers kommandoer.
 En af de store fordele ved at have en central server, i modsætning til brugernes enhed som håndtering, er den markant større mulighed for lokalt server arbejde. På en central server er der mulighed for at forebygge heavy-load og f.eks. indlæse, samt gemme (som en slags cache), alle beskeder for en specifik tråd, inden brugeren faktisk beder om dens indhold. Derved kan man benytte serverens hviletilstand til aktivt at forebygge aktiviteter, og derved mindske fremtidige belastnings problemer.
 
 \begin{figure}[H]
@@ -21,86 +27,113 @@ En af de store fordele ved at have en central server, i modsætning til brugerne
     \begin{subfigure}{0.5\textwidth}
         \centering
         \includegraphics[width=0.7\linewidth, height=4cm]{Projectdoc/Assets/Illustrationer/Security_diagram_2.png}
-        \caption{Client-baseret system}
+        \caption{Klient-baseret system}
         \label{fig:decentral_server}
     \end{subfigure}
     \caption{Forskellen på central og decentral server struktur}
     \label{fig:serverstruktur}
 \end{figure}
 
-En central server trods dens eventuelle positive effekter, er dog også et generelt større sikkerhedsbrud. F.eks. Kunne en sådan server, (Illustreret ved [Figur \ref{fig:central_server}]), lække generelle lagerede informationer, eller lige frem enten blive overvåget for kommunikation, samt blive spærret som en helhed. Dette vil selvfølgelig også kunne ske for den enkelte bruger [\ref{fig:decentral_server}], men disse ville i sådanne tilfælde også kun påvirke den enkelte, og ikke systemet som en helhed.\\
-Grundet disse negative effekter for en central server, der generelt berører brugerens sikkerhed, vil den mest optimale løsning for projektets sikre kommunikation være, at anvende brugernes enkelte enheder til system håndtering. Dette vil dog ikke i sig selv kunne tages til konklusion, da et system baseret alene på enkelte enheder egen håndteringer, vil kunne danne en større kompromitterings fare. Denne fare vil kunne opstå ved anvendes af lokalt cache for data fetching, da denne information vil kunne findes på flere nodes, dog uden denne cache vil de enkelte enheder skulle foretage mange heavy loads forespørgsler. Disse forespørgsler vil ikke bare danne større spekulation hos netværksmonitorering, og derved en større sandsynlighed for terminering, men også danne et meget stort dataforbrug hos enddevices, samt en lang load time, der kan fremprovokere brugerfejl.
-
-% foruden selve strukturen:
-% Er der også problemer med fetching af sammenhæng.
-
-% Tilsidst:
-% Kan der være et kulturelt problem i steganografi på et socialt medie.
+En central server trods dens eventuelle positive effekter, er dog også et generelt større sikkerhedsbrud. F.eks. Kunne en sådan server, (Illustreret ved [Figur \ref{fig:central_server}]), lække generelle lagerede informationer, eller ligefrem blive overvåget for kommunikation, samt blive spærret som en helhed. Dette vil selvfølgelig også kunne ske for den enkelte bruger [\ref{fig:decentral_server}], men disse ville i sådanne tilfælde også kun påvirke den enkelte, og ikke systemet som en helhed.\\
+Grundet disse negative effekter for en central server, der generelt berører brugerens sikkerhed, vil den mest optimale løsning for projektets sikre kommunikation være, at anvende brugernes enkelte enheder til system håndtering. Dette vil dog ikke i sig selv kunne tages til konklusion, da et system baseret alene på enkelte enheder egen håndteringer, vil kunne danne en større kompromitterings fare. Denne fare vil kunne opstå ved anvendelse af lokal cache for data fetching, da denne information vil kunne findes på flere nodes, dog uden denne cache vil de enkelte enheder skulle foretage mange heavy loads forespørgsler. Disse forespørgsler vil ikke bare danne større spekulation hos netværksmonitorering, og derved en større sandsynlighed for terminering, men også danne et meget stort dataforbrug hos enddevices, samt en lang load time, der kan fremprovokere brugerfejl.
 
 \subsection{Teori}
-Top
+Dette afsnit vil redegøre for de grundlæggende teorier og begreber bag systemets komponenter. Afsnittet vil lægge op til en række tekniske løsningsforslag, som kræver den viden beskrevet i dette afsnit.
 
-\subsubsection{API struktur / Socket kommunikation}
-% Hvad er Api struktur ? Hvorfor bruger man APIer? REST og CRUD beskrivelse
-% Hvad er socket kommunikation ?
+\subsubsection{API, REST og Socket kommunikation}
+De fleste tjenester opsat i dag, foruden deres givende handlinger, tilbyder også mulighed for at et program automatisk kan foretage interaktion, altså uden et menneskes handlinger. En sådanne maskin interaktion siges, at anvende et API (\underline{A}pplication \underline{P}rogramming \underline{I}nterface) til at standardisere dets forventede inputs og udputs. 
+API står i modsætning til UI (\underline{U}ser \underline{I}nterface), hvor et menneske interagerer med en tjeneste, og beskriver hvordan, samt hvad der skal til, for at foretage bestemte handlinger, så som f.eks. efter denne rapports idé, at uploade et billede til en given tjeneste. En API er derfor generelt nødvendig for at kunne opsætte en troværdig interaktion mellem tredje parts tjenester, og den oprindelige udbyder. \cite{WhatIsAPI}
 
-\subsubsection{Caching}
+"API" er i dag en alment kendt metode betegnelse, og findes derfor i et utal at forskellige versioner, typer og udgivere. F.eks. er nogle af de mest kendte Googles eget API "Google-API", eller det mere standardiserede web API "REST" (\underline{RE}presentational \underline{S}tate \underline{T}ransfer), begge ikke kun anvendt i lukkede systemer, men også generelt alment på nettet. \cite{codecademy_REST}
+
+En API protokol beskriver kun hvordan en given data forventes formateret, og ikke hvordan en data skal leveres, derfor anvender mange tjenester også en eller anden form for Socket kommunikation til at forventningsafstemme, og sikre en data leverance. Bagsiden ved opsætning af en Socket forbindelse er dog at disse også kræver opsætning af en listener, en server applikation, der aktivt står og lytter efter en klient, som ønsker at oprette en kommunikation på en given port, dette vil sige at den oprindelige tjeneste, efter opsætningen af et socket, nu har et åbent interface, og derved også en øget sikkerheds risiko. Efter opsætningen er listenerens opgave at sørge for hurtigst muligt, at sikre en åben forbindelse på en anden port, mellem denne server og klient ved en oprettet forbindelse, da porten for listeneren igen skal være fri til den næste klient. \cite{WhatIsSocket} Selv om man ikke direkte kan undgå brugen af Socket kommunikation, ved en server til klient kommunikation, og derved generelt må acceptere denne øgede sikkerheds risiko, forefindes der dog stadig flere måder at opnå samme resultat, også uden direkte opsætning af selve socket forbindelsen, så som foreksempel HTTP-REST, Active-MQ eller Rabbit-MQ. \cite{SocketAlternatives}
 
 \subsubsection{Decentralisering}
-For at holde den samlede kommunikationsplatform så sikkert, og pålideligt, som muligt, vil mulighederne for decentralisering af systemet blive diskuteret i dette afsnit.
+\label{Decentralisering}
+For at holde den samlede kommunikationsplatform så sikker, og pålidelig, som muligt, vil mulighederne for decentralisering af systemet blive diskuteret i dette afsnit.
+
 Det grundlæggende princip er, at jo mere et givet system afhænger af bestemte nodes, jo mere sårbart vil det også være. På den anden side, vil anvendelsen af servere i centralt systemet også tillade en langt højere effektivitet. Derfor vil forskellige aspekter af kommunikationsplatformen blive diskuteret for at kunne finde et kompromis mellem helt centraliseret og helt decentraliseret.
 
-For at kunne opretholde en mængde af bots, her værende dummy brugere som sikrer anonymitet for brugeren, associeret med en potentielt mistænkelig opførelse, vil det være nødvendigt at kunne tilføje nye bots til netværket løbende, samt opdatere status af nuværende bots, da denne type bots har været lukket ned på flere sociale medier. Én mulig løsning på dette problem kunne være at holde en database opdateret med statussen af de enkelte bots. Hvis en given bot så blev lukket ned, ville den opdaterede database, gøre enhver bruger i stand til blot at vælge en anden bot. Problemet med denne løsning er, at den vil introducere et svagt link, databasen selv, der ville gøre en væsentlig del af systemet ubrugeligt, hvis den blev taget ned, indtil en erstatning kunne sættes op. Såfremt denne database kun kontaktes for at få listen opdateret, vil trafikken imellem den og klienterne dog være begrænset. Man kunne også forestille sig en ekstra database, som kun vil blive kontaktet hvis den primære er inaktiv, og at denne database kender til andre databaser som er backups af den primære. Denne opbygning vil gøre det meget svært at lukke systemet i længere tid.
-% Så længe den primære anvendelse af systemet foregår igennem en hjemmeside, vil denne server kunne sidde med denne bot liste selv. Dette gør dog blot denne server endnu mere kritisk.
+For at kunne opretholde en mængde af bots, her forstået som falske brugere, der sikrer anonymitet for brugeren på kommunikationsplatformen, associeret med en potentielt mistænkelig opførelse, vil det være nødvendigt at kunne tilføje nye bots til netværket løbende, samt opdatere status af nuværende bots, da det kunne formodes at ejerne af det relevante sociale medie ikke ønsker systematisk genereret falske brugere. Én mulig måde at holde styr på disse informationer kunne være at holde en database opdateret med statussen af de enkelte bots. Hvis en given bot så blev lukket ned, ville den opdaterede database, gøre enhver bruger i stand til blot at vælge en anden bot. Denne løsning vil dog introducere et svagt link, databasen selv, der ville gøre en væsentlig del af systemet ubrugeligt, hvis den blev taget ned, indtil en erstatning kunne sættes op. Såfremt denne database kun kontaktes for at få listen opdateret, vil trafikken imellem den og klienterne dog være begrænset. Man kunne også forestille sig en ekstra database, som kun vil blive kontaktet hvis den primære er inaktiv, og at denne database kender til andre databaser som er backups af den primære. Denne opbygning vil gøre det meget svært at lukke systemet i længere tid.
+
 En måde at undgå dette databaseproblem, er at lade hver klient have en lokal liste over aktive bots. Denne liste vil så med jævne intervaller blive opdateret igennem klient opdateringer. Med denne fremgang er det tænkeligt, at systemet vil kræve mange opdateringer, eller at der ofte vil være et antal utilgængelige bots på listen. 
-% Denne liste kunne også findes på en database som udelukkende har denne liste af bots. Dette vil minimere trafikken til databasen, hvilket vil mindske dens synlighed.
 
+\subsubsection{Metadata}
+\label{Metadata}
+Metadata kan grundlæggende defineres som data om data. Dermed kan det anvendes i mange sammenhænge. Et eksempel på metadata kunne være billeder. Dataen i et billede er i simpleste forstand lysintensiteter, i sort/hvid billeder, eller farver. Men udover denne data kunne man også gemme ting som dato, klokkeslet, GPS koordinater, navnet på ophavsmanden osv. Alt dette er eksempler på metadata som ikke påvirker indholdet, men som gør indholdet mere brugbart i mange forskellige sammenhænge. For eksempel vil vedhæftede søgeord gøre et billede galleri meget mere effektivt i at præsentere det ønskede materiale. Metadata kan både genereres automatisk af hardware/software systemer, men en bruger kunne også tilføre metadata manuelt. Dette er især sandt på sociale medier hvor der kan findes en stor mængde af generelle søgeord.
 
-% Ingen interconnectivity mellem devices, men skal facilitere data udveksling.... How the f-ing hell?
+På projektets sikrede kommunikationsplatform vil det være nødvendigt at kunne finde sammenhængende beskeder og denne sammenkædning vil ikke kunne foregå på åbenlys vis på et socialt medie. I stedet kunne én mulighed være, at gemme sammenhængen i noget tilsyneladende uskyldig metadata, men som er genereret ud fra en prædefineret algoritme. Dette vil give den sikrede kommunikationsplatform noget specifikt at søge efter, uden at det vil være et let læseligt flag.
 
-% Blockchain, ha lol (det ville kunne trackes, ik? Jo, i stor stor stor grad)
-% Bitconneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeect
-% Noice!
-
-% Dynamic updating / Databaser ?
-
-
-\subsection{Detaljeret system design} % ny titel
-% Beskrivelse af vores tilgang til dette afsnit, med de overordnet spørgsmål og flere løsningsforslag
+\subsection{System design proces / diskussion}
+% Top:
+%Beskrivelse af vores tilgang til dette afsnit, med de overordnet spørgsmål og flere løsningsforslag
+% Hvilke problemer er der ved systemet?
 
 \subsubsection{Sammenkædning af beskeder}
-% Sammenkædning af beskeder
-% - Dobbelt linked list - algoritme
 
-% - Brugerne har egen post på egen profil (problem med anonymitet???)
-\textbf{Lagring af den hemmelige besked på brugerens profil}
+\textbf{Forslag 1: Lagring af den hemmelige besked på brugerens profil}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{Projectdoc/Assets/Illustrationer/userbased-system.png}
-    \caption{}
+    \caption{UML diagram over et brugerkonto baseret kommunikations system}
     \label{fig:userbased}
 \end{figure}
-Brugerne logger ind på platformen ved hjælp af deres egne kontooplysninger til et given socialt medie. Platformen har nu mulighed for at sende den hemmelige besked direkte til brugerens egen konto. Platformen lægger automatisk den hemmelige besked ind i den pågældende bruger's opslag, og returnere samtidigt opslagets unikke ID tilbage. Dette ID bliver sammen med et unikt tråd ID 
 
-Det vil sige at brugerne selv har ansvar for at lagre beskeden,
+Brugerne logger ind på platformen [Figur \ref{fig:userbased}] ved hjælp af deres egne kontooplysninger til et given socialt medie. Platformen har nu mulighed for at sende den hemmelige besked direkte til brugerens egen konto. Platformen lægger automatisk den hemmelige besked ind i den pågældende bruger's opslag, og returnere samtidigt opslagets unikke ID tilbage. Dette ID bliver sammen med et unikt tråd ID lageret på en bot. Tråd ID bliver enten generet på stedet, hvis der oprettes en helt ny tråd, eller så bliver et tråd ID nedarvet fra et tidligere ID. Botten har også en konto på det givne sociale medie, kontrolleret af platformen selv. 
 
+Når brugerne af platformen ønsker at få alle opslag vist, så henter systemet alle bots oplag i den rækkefølge som opslagene er tilsendt til botten. Botten har, som før nævnt, gemt data i disse opslag som: tråd struktur og adressen (PostID'et) på beskeden. Det ekstraheret postID kan nu spores tilbage til den bruger der ejer den hemmelige besked.
+\\\\
+\textit{Fordele:}
+\begin{itemize}
+    \item[+] \textbf{Brugerkonti som proxy} \hfill \\ 
+    Hvis en bot bliver undersøgt vil beskederne ikke umiddelbart kunne blive aflæst. Samtidig vil det også være muligt for en bruger at genskabe deres opslag ved en eventuel nedlukning af en bot.
+    \item[+] \textbf{Sammenkædning af posts af samme forfatter} \hfill \\ 
+    Med et system som dette hvor opslag hentes fra brugerne selv, kan man samtidig hente og hashe brugerens ID, sådan måde at det ikke kan linkes tilbage til brugeren sig, men indikere at den samme bruger står bag flere opslag.
+\end{itemize}
+\\
+\textit{Ulemper:}
+\begin{itemize}
+    \item[-] \textbf{Skjul af metadata} \hfill \\
+    Denne løsning kræver at en rækker ID'er bliver skjult i metadata på sådan vis at det er genkendeligt for systemet, men ikke mennesker. Et problem der på nuværrende tidspunkt ikke har en løsning.
+    \item[-] \textbf{Dobbelt forspørgelse} \hfill \\
+    Systemet skal foruden kontakte systems egne bot konti også kontakt den enkelte bruger der opbevare et opslag.
+    \item[-] \textbf{Begrænset kontrol over opslag} \hfill \\ 
+    Brugeren kan slette deres opslag udenom systemet, og ødelægge trådes struktur.
+\end{itemize}
 
-+ Hvis en central BOT bliver undersøgt vil beskederne ikke kunne spores, men mindre de har bottens secret
-+ Sammenkædning af posts af samme forfatter
+%\textbf{Doubly linked list (Algoritme)}
 
-- Ingen løsning til skjul af metadata
-- Ekstra requests
-- Brugeren kan slette deres posts udenom system, og ødelægge trådens struktur
 % - Central server / server cache (Sikkerheds brist)
 
-% Hvordan kan man sikre en fornuftig køre tid? (Undgå 10000 undersøgelser for at finde én kommentar)
-% - Formindsk chancen for mistænkelig data trafik. Både i server requests og det visuelt uploaded
-% - Load tid
+\subsubsection{Næste emner}
+\\
+- Hvordan kan man sikre en fornuftig køre tid? (Undgå 10000 undersøgelser for at finde én kommentar)\\
+- Formindsk chancen for mistænkelig data trafik. Både i server requests og det visuelt uploaded\\
+--- Load tid
+\\
+- API udbyderen som brist i systemet?\\
 
-% API udbyderen som brist i systemet?
-% - TOS problemer
-% - Lukning af bots og dermed samtaler
+--- TOS problemer\\
+--- Lukning af bots og dermed samtaler\\
+--- Sikring ved lukning
+\\
+- Hvordan skal forum strukturen være ? (Design)
+\\
+- Hvordan kan vi skulle sammenkædnings nødvendig data i metadata?
+\\
+- Delkonklusion, samt endelige valg af løsning
 
-% Hvordan skal forum strukturen være ? (Design)
+% ==================================
+% Ekstra kommentarer
+% ==================================
 
-% Hvordan kan vi skulle sammenkædnings nødvendig data i metadata?
+% Foruden selve strukturen: Er der også problemer med fetching af sammenhæng?
+% Kan der være et kulturelt problem i steganografi på et socialt medie?
+
+% Så længe den primære anvendelse af systemet foregår igennem en hjemmeside, vil denne server kunne sidde med denne bot liste selv. Dette gør dog blot denne server endnu mere kritisk.
+
+% Denne liste kunne også findes på en database som udelukkende har denne liste af bots. Dette vil minimere trafikken til databasen, hvilket vil mindske dens synlighed.
+
+% Ingen interconnectivity mellem devices, men skal facilitere data udveksling.... How the f-ing hell?
+
+% Dynamic updating / Databaser
