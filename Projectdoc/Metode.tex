@@ -3,9 +3,7 @@
 Ud fra kravspecifikationen bliver systemet pålagt at være sikkert, men samtidig også at køre med en fornuftig køretid. Disse krav kan  modarbejde hinanden på flere forskellige måder, blandt andet i spørgsmålet om systemet skal køre centralt eller decentralt.
 \\\\
 \textbf{Central eller decentral}\\
-Hvis man har spørgsmålet med optimal køretid i mente, så vil en central løsning med en server der lagrer stien til alle beskeder i systemet. Dette gør enheder der tilgår den centrale database i stand til at forespørge og finde opslag 
-
-%En af de store fordele ved at have en central server, i modsætning til brugernes enhed som håndtering, er den markant større mulighed for lokalt server arbejde. På en central server er der mulighed for at forebygge heavy-load og f.eks. indlæse, samt gemme (som en slags cache), alle beskeder for en specifik tråd, inden brugeren faktisk beder om dens indhold. Derved kan man benytte serverens hviletilstand til aktivt at forebygge aktiviteter, og derved mindske fremtidige belastnings problemer.
+Hvis man har spørgsmålet med optimal køretid i mente, så vil en central løsning med en server der lagrer stien til alle beskeder i systemet. Dette gør enheder der tilgår den centrale database i stand til at forespørge og finde opslag meget hurtigt, da den har kortlagt alle relevante opslag. Dette står i modsætning til en decentral løsning, hvor brugernes enhed fungerer som mikro servere der selv skal lede efter de relevante opslag. 
 
 \begin{figure}[H]
     \begin{subfigure}{0.5\textwidth}
@@ -24,7 +22,7 @@ Hvis man har spørgsmålet med optimal køretid i mente, så vil en central løs
     \label{fig:serverstruktur}
 \end{figure}
 
-En central server trods dens eventuelle positive effekter, er dog også et generelt større sikkerhedsbrud. F.eks. Kunne en sådan server, (Illustreret ved [Figur \ref{fig:central_server}]), lække generelle lagerede informationer, eller ligefrem blive overvåget for kommunikation, samt blive spærret som en helhed. Dette vil selvfølgelig også kunne ske for den enkelte bruger [\ref{fig:decentral_server}], men disse ville i sådanne tilfælde også kun påvirke den enkelte, og ikke systemet som en helhed.\\
+En central server trods dens eventuelle positive effekter, er dog også et generelt større sikkerhedsbrud. F.eks. kunne en sådan server, (Illustreret ved [Figur \ref{fig:central_server}]), lække generelle lagerede informationer, eller ligefrem blive overvåget for kommunikation, samt blive spærret som en helhed. Dette vil selvfølgelig også kunne ske for den enkelte bruger [\ref{fig:decentral_server}], men disse ville i sådanne tilfælde også kun påvirke den enkelte, og ikke systemet som en helhed.\\
 Grundet disse negative effekter for en central server, der generelt berører brugerens sikkerhed, vil den mest optimale løsning for projektets sikre kommunikation være, at anvende brugernes enkelte enheder til system håndtering. Dette vil dog ikke i sig selv kunne tages til konklusion, da et system baseret alene på enkelte enheder egen håndteringer, vil kunne danne en større kompromitterings fare. Denne fare vil kunne opstå ved anvendelse af lokal cache for data fetching, da denne information vil kunne findes på flere nodes, dog uden denne cache vil de enkelte enheder skulle foretage mange heavy loads forespørgsler. Disse forespørgsler vil ikke bare danne større spekulation hos netværksmonitorering, og derved en større sandsynlighed for terminering, men også danne et meget stort dataforbrug hos enddevices, samt en lang load time, der kan fremprovokere brugerfejl.
 
 % Begynd med krav om sikkerhed og køretid. Ud fra dette kan vi diskutere selve arkitekturen af systemet. Her kan vi passende diskutere forskellene mellem en centraliseret og en decentraliseret løsning. 
@@ -46,7 +44,7 @@ Senere i dette afsnit vil disse føromtalte dilemmaer såvel som, teorier og tan
 
 \\\\
 
-En af de store fordele ved at have en central server, i modsætning til brugernes enhed som håndtering, er den markant større mulighed for lokalt server arbejde. På en central server er der mulighed for at forebygge heavy-load og f.eks. indlæse, samt gemme (som en slags cache), alle beskeder for en specifik tråd, inden brugeren faktisk beder om dens indhold. Derved kan man benytte serverens hviletilstand til aktivt at forebygge aktiviteter, og derved mindske fremtidige belastnings problemer.
+%En af de store fordele ved at have en central server, i modsætning til brugernes enhed som håndtering, er den markant større mulighed for lokalt server arbejde. På en central server er der mulighed for at forebygge heavy-load og f.eks. indlæse, samt gemme (som en slags cache), alle beskeder for en specifik tråd, inden brugeren faktisk beder om dens indhold. Derved kan man benytte serverens hviletilstand til aktivt at forebygge aktiviteter, og derved mindske fremtidige belastnings problemer.
 
 
 \subsection{Teori}
