@@ -1,21 +1,11 @@
 \section{Metode}
 \subsection{Overordnet system design}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\linewidth]{Projectdoc/Assets/Illustrationer/system-diagram.png}
-    \caption{System aktiverings diagram}
-    \label{fig:sysdiagram}
-\end{figure}
-
-I systemets handlings diagram ovenfor [Figur \ref{fig:sysdiagram}] ses produktets overordnede handlingsflow. Diagrammet er ikke en endelig eller færdig udarbejdelse, men skabt til at give et letforståeligt overblik over systemets indhold, nødvendige resurse behov, samt mulige anvendte teknologier. Ud fra diagrammets flow, med start fra den sorte cirkel i toppen, kan der som et eksempel ses, at systemet anses for at skulle have tilgang til en Database, indeholdende mulige Bot associeringer til en brugeres login, eller en tilgang til det anvendte sociale medies API for samme.\\
-I dette eksempel er f.eks. ikke videre beskrevet hvordan, eller om systemet overhovedet skal, håndtere denne databases placering eller tilgang, efter en eventuel spærring fra tredjeparter, der f.eks. kunne anse systemet for at understøtte maliciøse aktiviteter.\\
-Efter denne login aktivitet ses hovedmenuen, hvorfra brugerne kan vælge at f.eks. tilgå systemets indstillinger, danne en ny besked, eller hente tidligere beskeder og tråde. Denne lægger også op til et andet dilemma omhandlende hvordan systemet, uden at skabe en større række af mistænkelige forespørgsler, skal kunne genkende, hente, og sammekæde flere beskeder på op til flere mulige brugere kontoer, hvilket efter simple normale requests vil kræve op til måske flere hundrede transmissioner per request.\\
-Senere i dette afsnit vil disse føromtalte dilemmaer såvel som, teorier og tanker blandt andre blive videre redegjort for, med henblik på at skabe et endeligt oplæg til en række tekniske læsningsforslag.
-
+Ud fra kravspecifikationen bliver systemet pålagt at være sikkert, men samtidig også at køre med en fornuftig køretid. Disse krav kan  modarbejde hinanden på flere forskellige måder, blandt andet i spørgsmålet om systemet skal køre centralt eller decentralt.
 \\\\
-Systemet beskrevet ved [Figur \ref{fig:sysdiagram}] er hovedsageligt designet efter et User Activity Action Event Flow. 
-Dette vil sige at alle systemets aktiviteter er baseret på en brugers aktive handlinger, og kan derved styres fra et centralt sted. Her tales om enten brugerens egen enhed, eller en central system server, der ikke fortager andre handlinger end at responderer klart på en brugers kommandoer.
-En af de store fordele ved at have en central server, i modsætning til brugernes enhed som håndtering, er den markant større mulighed for lokalt server arbejde. På en central server er der mulighed for at forebygge heavy-load og f.eks. indlæse, samt gemme (som en slags cache), alle beskeder for en specifik tråd, inden brugeren faktisk beder om dens indhold. Derved kan man benytte serverens hviletilstand til aktivt at forebygge aktiviteter, og derved mindske fremtidige belastnings problemer.
+\textbf{Central eller decentral}\\
+Hvis man har spørgsmålet med optimal køretid i mente, så vil en central løsning med en server der lagrer stien til alle beskeder i systemet. Dette gør 
+
+%En af de store fordele ved at have en central server, i modsætning til brugernes enhed som håndtering, er den markant større mulighed for lokalt server arbejde. På en central server er der mulighed for at forebygge heavy-load og f.eks. indlæse, samt gemme (som en slags cache), alle beskeder for en specifik tråd, inden brugeren faktisk beder om dens indhold. Derved kan man benytte serverens hviletilstand til aktivt at forebygge aktiviteter, og derved mindske fremtidige belastnings problemer.
 
 \begin{figure}[H]
     \begin{subfigure}{0.5\textwidth}
@@ -27,7 +17,7 @@ En af de store fordele ved at have en central server, i modsætning til brugerne
     \begin{subfigure}{0.5\textwidth}
         \centering
         \includegraphics[width=0.7\linewidth, height=4cm]{Projectdoc/Assets/Illustrationer/Security_diagram_2.png}
-        \caption{Klient-baseret system}
+        \caption{Klient-baseret system (decentral)}
         \label{fig:decentral_server}
     \end{subfigure}
     \caption{Forskellen på central og decentral server struktur}
@@ -36,6 +26,28 @@ En af de store fordele ved at have en central server, i modsætning til brugerne
 
 En central server trods dens eventuelle positive effekter, er dog også et generelt større sikkerhedsbrud. F.eks. Kunne en sådan server, (Illustreret ved [Figur \ref{fig:central_server}]), lække generelle lagerede informationer, eller ligefrem blive overvåget for kommunikation, samt blive spærret som en helhed. Dette vil selvfølgelig også kunne ske for den enkelte bruger [\ref{fig:decentral_server}], men disse ville i sådanne tilfælde også kun påvirke den enkelte, og ikke systemet som en helhed.\\
 Grundet disse negative effekter for en central server, der generelt berører brugerens sikkerhed, vil den mest optimale løsning for projektets sikre kommunikation være, at anvende brugernes enkelte enheder til system håndtering. Dette vil dog ikke i sig selv kunne tages til konklusion, da et system baseret alene på enkelte enheder egen håndteringer, vil kunne danne en større kompromitterings fare. Denne fare vil kunne opstå ved anvendelse af lokal cache for data fetching, da denne information vil kunne findes på flere nodes, dog uden denne cache vil de enkelte enheder skulle foretage mange heavy loads forespørgsler. Disse forespørgsler vil ikke bare danne større spekulation hos netværksmonitorering, og derved en større sandsynlighed for terminering, men også danne et meget stort dataforbrug hos enddevices, samt en lang load time, der kan fremprovokere brugerfejl.
+
+% Begynd med krav om sikkerhed og køretid. Ud fra dette kan vi diskutere selve arkitekturen af systemet. Her kan vi passende diskutere forskellene mellem en centraliseret og en decentraliseret løsning. 
+
+% Diskutér sikkerheds brist forsaget af en central database, men diskuter også potentialet af en database med krypteringsnøgler og hvordan det ændrer systemets angrebsflade.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Projectdoc/Assets/Illustrationer/simple-system.png}
+    \caption{System aktiverings diagram}
+    \label{fig:sysdiagram}
+\end{figure}
+Systemet beskrevet ved [Figur \ref{fig:sysdiagram}] er baseret på en brugers aktive handlinger, og kan derved styres fra et centralt sted. Her tales om enten brugerens egen enhed, eller en central system server, der ikke fortager andre handlinger end at responderer klart på en brugers kommandoer.
+
+I systemets handlings diagram ovenfor [Figur \ref{fig:sysdiagram}] ses produktets overordnede handlingsflow. Diagrammet er ikke en endelig eller færdig udarbejdelse, men skabt til at give et letforståeligt overblik over systemets indhold, nødvendige resurse behov, samt mulige anvendte teknologier. Ud fra diagrammets flow, med start fra den sorte cirkel i toppen, kan der som et eksempel ses, at systemet anses for at skulle have tilgang til en Database, indeholdende mulige Bot associeringer til en brugeres login, eller en tilgang til det anvendte sociale medies API for samme.\\
+I dette eksempel er f.eks. ikke videre beskrevet hvordan, eller om systemet overhovedet skal, håndtere denne databases placering eller tilgang, efter en eventuel spærring fra tredjeparter, der f.eks. kunne anse systemet for at understøtte maliciøse aktiviteter.\\
+Efter denne login aktivitet ses hovedmenuen, hvorfra brugerne kan vælge at f.eks. tilgå systemets indstillinger, danne en ny besked, eller hente tidligere beskeder og tråde. Denne lægger også op til et andet dilemma omhandlende hvordan systemet, uden at skabe en større række af mistænkelige forespørgsler, skal kunne genkende, hente, og sammekæde flere beskeder på op til flere mulige brugere kontoer, hvilket efter simple normale requests vil kræve op til måske flere hundrede transmissioner per request.\\
+Senere i dette afsnit vil disse føromtalte dilemmaer såvel som, teorier og tanker blandt andre blive videre redegjort for, med henblik på at skabe et endeligt oplæg til en række tekniske læsningsforslag.
+
+\\\\
+
+En af de store fordele ved at have en central server, i modsætning til brugernes enhed som håndtering, er den markant større mulighed for lokalt server arbejde. På en central server er der mulighed for at forebygge heavy-load og f.eks. indlæse, samt gemme (som en slags cache), alle beskeder for en specifik tråd, inden brugeren faktisk beder om dens indhold. Derved kan man benytte serverens hviletilstand til aktivt at forebygge aktiviteter, og derved mindske fremtidige belastnings problemer.
+
 
 \subsection{Teori}
 Dette afsnit vil redegøre for de grundlæggende teorier og begreber bag systemets komponenter. Afsnittet vil lægge op til en række tekniske løsningsforslag, som kræver den viden beskrevet i dette afsnit.
