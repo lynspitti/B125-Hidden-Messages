@@ -38,36 +38,47 @@
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\textwidth, angle =0]{Struktureret_System_Udvikling/Workshop_2/Assets/Workshop2_ClassDiagram.png}
+        \includegraphics[width=1\textwidth,angle=0]{Struktureret_System_Udvikling/Workshop_2/Assets/Workshop2_ClassDiagram.png}
         \caption{Interaction Class Diagram}
-        \label{fig:my_label}
+        \label{fig:ClassDiagram}
     \end{figure}
     \noindent
-    Gruppen har i dette workshop valgt at lægge mest vægt på testing og handling i koden omhandlende Userinterface. Hvor her referere til sidste workshops class diagram.
-    Dog forefindes stadig mindre whiteboxtesting path tests på Verstationens side. F.eks. kan under Temp\_Measurement og Humidity\_Measurement findes følgende:
+    Gruppen har i dette workshop valgt at lægge mest vægt på testing og handling i koden omhandlende Userinterface. Hvor her referere til sidste workshops class diagram \ref{fig:ClassDiagram}.
+    Dog forefindes stadig mindre whiteboxtesting path tests på Verstationens side. F.eks. kan man under Temp\_Measurement og Humidity\_Measurement findes følgende, der tester ikke kun tester den litererede path men også en minour result test.
     
     \begin{figure}[H]
-    \begin{subfigure}{0.5\textwidth}
-        \centering
-        \includegraphics[width=1\linewidth, height=4cm]{Struktureret_System_Udvikling/} 
-        \caption{Central server}
-        \label{fig:central_server}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-        \centering
-        \includegraphics[width=0.7\linewidth, height=4cm]{Projectdoc/Assets/Illustrationer/Security_diagram_2.png}
-        \caption{Klient-baseret system (decentral)}
-        \label{fig:decentral_server}
-    \end{subfigure}
-    \caption{Forskellen på central og decentral server struktur}
-    \label{fig:serverstruktur}
-\end{figure}
+        \begin{subfigure}{0.3\textwidth}
+            \centering
+            \includegraphics[width=1\linewidth, height=2cm]{Struktureret_System_Udvikling/Workshop_3/Assets/Start.PNG}
+            \caption{Path testing}
+            \label{fig:TestPath}
+        \end{subfigure}
+        \begin{subfigure}{0.7\textwidth}
+            \centering
+            \includegraphics[width=1\linewidth, height=7cm]{Struktureret_System_Udvikling/Workshop_3/Assets/Secound.PNG}
+            \caption{Minour result testing}
+            \label{fig:TestRes}
+        \end{subfigure}
+        \label{fig:Testing}
+    \end{figure}
     
+    %Den anden side... pc
     
+    Foruden førnævnte har gruppen også inplamenteret følgende funktionaliteter:
+    SquareRoot og BubbleSort.
+    Dog da disse funktionaliteter har påvist manglende test, samt ikke udgiver det forventede resultat har vi også gennem gået en retning af disse ved anvendelse af whitebox testing, en testings metode, hvor funktionaliteten gennemgåes først i en flowgraf ved dens forventede udputs for forudbestemte muligheder eller inputs, og dernest også ved nærmere inspektion af selve koden, samt dens faktiske givende resultater.
     
-    \noindent
+    For SquareRoot har gruppen dannet følgende Flowgraf:
+    % indput grafer
+    % input forklaring af fejl og deres fund.
+
+    For BubbleSort har gruppen dannet følgende Flowgraf:
+    % indput grafer
+    % input forklaring af fejl og deres fund.
+
+    Disse funktionaliterer er efterfølgende blevet anvendt i følgende støre fonktionaliteter:
+    Gennemsnit og standardafvigelsesberegningsfunktionalitet,
+    samt Sorterings alguritme.
+    Til disse har gruppen også efterfølgende anvendt Blackbox testing, en metode hvor forventede output sammenligenes med faktuelle resultat, uden brug af kode inspektion, for både førnævnte induviduelle funktionaliteter såvel som hele systeme, til efterfølgende kontrol tests.
     
-    
-    % Class diagram description
-   % \input{Struktureret_System_Udvikling/Workshop_2/ClassDescription.tex}
 \end{document}
