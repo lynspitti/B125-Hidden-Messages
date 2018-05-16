@@ -64,18 +64,39 @@
     
     %Den anden side... pc
     
+    \noindent
     Foruden førnævnte har gruppen også inplamenteret følgende funktionaliteter:
     SquareRoot og BubbleSort.
     Dog da disse funktionaliteter har påvist manglende test, samt ikke udgiver det forventede resultat har vi også gennem gået en retning af disse ved anvendelse af whitebox testing, en testings metode, hvor funktionaliteten gennemgåes først i en flowgraf ved dens forventede udputs for forudbestemte muligheder eller inputs, og dernest også ved nærmere inspektion af selve koden, samt dens faktiske givende resultater.
     
+    \noindent
     For SquareRoot har gruppen dannet følgende Flowgraf:
     % indput grafer
     % input forklaring af fejl og deres fund.
+    \\
+    \noindent
+    For BubbleSort har gruppen dannet følgende Flowgraf:\\\\
+    \begin{subfigure}{1\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth, height=7cm]{Struktureret_System_Udvikling/Workshop_3/Booble_Sort_Flowgraph.png}
+        \caption{BoobleSort Flowgraph}
+        \label{fig:BoobleSortGraph}
+    \end{subfigure}
+    Og kan derfor, ved et retmessigt forløb forvente en gennemgang i vejene:\\
+    A-B-\{C-D-E\}*"Array størelse"-F-G-\{H-\{K-[N/L-M]-O\}-I-J\}-P-O-\{R-S-T\}*"Array størelse"-U\\
+    Hvor \{ - \} definere et loop af en vis størelse, der altid skal opfylde det beskrævende mønster.\\
+    Eneste undvigelse kan ses ved N der også kan være beskrevet ved vejen L-M.\\
+    \\
+    Efter første gennemgang kan dog konkluderes at funktionen tager følgende vej:\\
+    A-B-\{C-D-E\}*4-F-G-H-K-K-K-K-......\\
+    Derved kan ses at her forekommer 2 typer af fejl:\\
+    Første i loopet mellem C,D,E der ikke fuldender den forvendtede længte. Denne kan løses ved kodens forloop der skal rettes fra "for(int i = 0; i \textless --size; i++)" til "for(int i = 0; i \textless= size; i++)".\\
+    Anden fejl forekommer i loopet ved K, hvor man ved en nærmere kode inspektion kan se at de omkringliggende loops mangler afsluttende brakkets.\\
+    Efter anden gennemgang kan dog stadig ses, at funktionen ikke tager forventede vej, da næste forventede vej ville være: F-G-H-K-L-M-O-K-L-M-O..., for det diffenerede array "10-2-5...", og ikke den resulterende vej: F-G-H-K-N-O-K-N-O...\\
+    Denne fejl skal findes i sorterings kodens tjek for, om et ellement på den givende possition er stører end næsteværende ellement. Koden "if(a[j] \textless a[i+1])" skal derfor rettes til "if(a[j] \textgreater a[j+1])", da j diffinerer nuværende tjek og i diffinerer arrayets gennemgang. Efterfølgende skal dog også bemærkes at det samme deffinerede "i", også anvendt i koden "hold = a[i];", heller ikke relatere til den forvendtede possition, og skal derfor af samme grunde rettes til "hold = a[j];".\\
+    Efter sidste gennemgangs rettelser, kan sidste fejlrettelse findes i loopet diffineret fra H-J, der ved et gennemløb bliver affsluttet inden dens forvendtede ressultat. Altså kan fejlen findes i koden "for(i = 0; i \textless (size \&\& switched); i++)", hvor her bemærkes at loopets header indeholder en forkert sat ramme "i \textless (size \&\& switched)" skal derfor rettes til "(i \textless size) \&\& switched".
 
-    For BubbleSort har gruppen dannet følgende Flowgraf:
-    % indput grafer
-    % input forklaring af fejl og deres fund.
-
+    \noindent
     Disse funktionaliterer er efterfølgende blevet anvendt i følgende støre fonktionaliteter:
     Gennemsnit og standardafvigelsesberegningsfunktionalitet,
     samt Sorterings alguritme.
