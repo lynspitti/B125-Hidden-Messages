@@ -22,7 +22,8 @@ public:
 }; // End of class definition
 
 
-SquareRoot1::SquareRoot1(float val) {
+SquareRoot1::SquareRoot1(float val){
+  cout << "C";
 	res = sqrt(val*val,val/2.0,0.5);
 ;
 }
@@ -30,31 +31,39 @@ SquareRoot1::SquareRoot1(float val) {
 //Det her er kernen i algoritmen
 float SquareRoot1::sqrt(float tal, float gaet,float step)
 {
- float tmp;
- int tohigh=1;
+  float tmp;
+  int tohigh=1;
 
   tmp = gaet*gaet;
 
-  cout << "C";
-  if (((tmp-tal)*(tmp-tal))< EPS*EPS) {
+  cout << "D";
+  if (((tmp-tal)*(tmp-tal)) < EPS*EPS) {
+    cout << "J";
     cout << "\nFound " << tal << ", " << gaet;
     return (gaet);
   }
   else {
+    cout << "E";
     if (tal+EPS > tmp) {
+      cout << "F";
       if (tohigh) {
+        cout << "f";
         tohigh = 1;
         step = 0.5*step;
       }
       cout << "\n Too large: " << tal << ", " << tmp << ", " << step;
+      cout << "G";
       return sqrt(tal, (1.0-step)*gaet,step);
     }
     else {
+      cout << "H";
       if (!tohigh) {
+        cout << "h";
         tohigh = 0;
         step = 0.5;
       }
       cout << "\n Too small: " << tal << ", " << tmp << ", " << step;
+      cout << "I";
       return sqrt(tal, (1.0+step)*gaet,step);
     }
   }
@@ -73,5 +82,6 @@ int main(void)
     	cout << "\nsqrt(" << f << ") = " << sq1.res;
     	cout << "L";
   	}
+  	cout << "M";
   	return 0;
 }
