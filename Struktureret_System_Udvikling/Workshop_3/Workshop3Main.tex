@@ -77,7 +77,21 @@
         \caption{BoobleSort Flowgraph}
         \label{fig:BoobleSortGraph}
     \end{subfigure}
-    % input forklaring af fejl og deres fund.
+    Og kan derfor, ved et retmessigt forløb forvente en gennemgang i vejene:\\
+    A-B-\{C-D-E-[F-G/H-I]\}*"Nødvendige gæt"-C-D-J-K-L-M\\
+    Hvor \{ - \} definere et loop af en vis størelse, der altid skal opfylde det beskrævende mønster.\\
+    Eneste undvigelse kan ses ved F-G der også kan være beskrevet ved vejen H-I.\\
+    \\
+    Efter første gennemgang kan dog konkluderes at funktionen tager følgende vej:\\
+    A-B-C-D-E-F-G-D-E-F-G-D-E-F-.....
+    
+    \begin{subfigure}{1\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth, height=7cm]{Struktureret_System_Udvikling/Workshop_3/}
+        \caption{BoobleSort Flowgraph}
+        \label{fig:BoobleSortGraph}
+    \end{subfigure}
+    
     \\
     \noindent
     For BubbleSort har gruppen dannet følgende Flowgraf:\\
