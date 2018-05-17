@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{subcaption}
+\usepackage{enumitem}
 \usepackage{geometry}
 \usepackage{xcolor}
 \usepackage{float}
@@ -44,7 +45,7 @@
     \end{figure}
     \noindent
     Gruppen har i dette workshop valgt at lægge mest vægt på testing og handling i koden omhandlende Userinterface. Hvor her referere til sidste workshops class diagram \ref{fig:ClassDiagram}.
-    Dog forefindes stadig mindre whiteboxtesting path tests på Verstationens side. F.eks. kan man under Temp\_Measurement og Humidity\_Measurement findes følgende, der tester ikke kun tester den litererede path men også en minour result test.
+    Dog forefindes stadig mindre whiteboxtesting path tests på Vejrstationens side. F.eks. kan man under Temp\_Measurement og Humidity\_Measurement finde følgende, der tester ikke kun tester den litererede path men også en minour result test.
     
     \begin{figure}[H]
         \begin{subfigure}{0.3\textwidth}
@@ -71,36 +72,59 @@
     
     \noindent
     For SquareRoot har gruppen dannet følgende Flowgraf:\\
-    \begin{subfigure}{1\textwidth}
+    \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\linewidth, height=6cm]{Struktureret_System_Udvikling/Workshop_3/SquareRoot_FlowGraph.png}
-        \caption{BoobleSort Flowgraph}
-        \label{fig:BoobleSortGraph}
-    \end{subfigure}
+        \includegraphics[width=1\textwidth,angle=0]{Struktureret_System_Udvikling/Workshop_3/SquareRoot_FlowGraph.png}
+        \caption{SquearRoot FlowGraph Diagram}
+        \label{fig:SquearRootGraph}
+    \end{figure}
     Og kan derfor, ved et retmessigt forløb forvente en gennemgang i vejene:\\
     A-B-\{C-D-E-[F-G/H-I]\}*"Nødvendige gæt"-C-D-J-K-L-M\\
     Hvor \{ - \} definere et loop af en vis størelse, der altid skal opfylde det beskrævende mønster.\\
     Eneste undvigelse kan ses ved F-G der også kan være beskrevet ved vejen H-I.\\
     \\
     Efter første gennemgang kan dog konkluderes at funktionen tager følgende vej:\\
-    A-B-C-D-E-F-G-D-E-F-G-D-E-F-.....
-    
-    \begin{subfigure}{1\textwidth}
-        \centering
-        \includegraphics[width=1\linewidth, height=7cm]{Struktureret_System_Udvikling/Workshop_3/}
-        \caption{BoobleSort Flowgraph}
-        \label{fig:BoobleSortGraph}
-    \end{subfigure}
+    A-B-C-D-E-F-G-C-D-E-F-G-C-D-E-F-.... Dette tyder at funktionen går i loop ved funktionen "sqrt" under check på gættets størelse i forhold til det originale tal, og herefter udprinter "To High".
+    Ved nærmere inspektion kan også fra gennemgangens udput, ses at det reelt indtastede tal, "i denne test 4", nu er blevet til 16. En kombinisation af disse betyder, at tallet kun vil blive mindre, da gettet er klassifiseret til "To High", og derved aldrig remme det originale tal, der desuden også er blevet kvadreret.
+    \begin{figure}[H]
+        \includegraphics[width=0.3\textwidth,angle=0]{Struktureret_System_Udvikling/Workshop_3/Udklip.PNG}
+        \label{fig:Udklip}
+    \end{figure}
+    \noindent
+    Disse fejl kan rettes i funktionen SquareRoot1, hvor "res = sqrt(val*val,val/2.0,0.5);" skal rettes til "res = sqrt(val,val/2.0,0.5);" og i funktionen sqrt, hvor "if (tal+EPS \textgreater tmp)" skal rettes til "if (tal+EPS \textless tmp)".
     
     \\
     \noindent
     For BubbleSort har gruppen dannet følgende Flowgraf:\\
-    \begin{subfigure}{1\textwidth}
-        \centering
-        \includegraphics[width=1\linewidth, height=7cm]{Struktureret_System_Udvikling/Workshop_3/Booble_Sort_Flowgraph.png}
-        \caption{BoobleSort Flowgraph}
-        \label{fig:BoobleSortGraph}
-    \end{subfigure}
+    \begin{table}[H]
+        \begin{minipage}{.7\textwidth}
+            \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\textwidth,angle=0]{Struktureret_System_Udvikling/Workshop_3/Booble_Sort_Flowgraph.png}
+            \caption{BoobleSort FlowGraph Diagram}
+            \label{fig:BoobleSortGraph}
+            \end{figure}
+        \end{minipage}
+        \begin{minipage}{.3\textwidth}
+            \begin{enumerate}[label=(\Alph*)]
+                \item A
+                \item B
+                \item C
+                \item D
+                \item E
+                \item F
+                \item G
+                \item H
+                \item I
+                \item J
+                \item K
+                \item L
+                \item M
+                \item N
+                \item O
+            \end{enumerate}
+        \end{minipage}
+    \end{table}
     Og kan derfor, ved et retmessigt forløb forvente en gennemgang i vejene:\\
     A-B-\{C-D-E\}*"Array størelse"-F-G-\{H-\{K-[N/L-M]-O\}-I-J\}-P-O-\{R-S-T\}*"Array størelse"-U\\
     Hvor \{ - \} definere et loop af en vis størelse, der altid skal opfylde det beskrævende mønster.\\
