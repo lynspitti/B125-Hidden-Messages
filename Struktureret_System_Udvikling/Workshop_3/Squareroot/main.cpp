@@ -49,7 +49,7 @@ float SquareRoot1::sqrt(float tal, float gaet,float step)
       if (tohigh) {
         //cout << "f";
         tohigh = 1;
-        step = 0.5*step;
+        step = 0.5;
       }
       cout << "\n Too large: " << tal << ", " << tmp << ", " << step;
       //cout << "G";
