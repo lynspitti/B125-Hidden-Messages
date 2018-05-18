@@ -61,7 +61,11 @@ int main(void) {
     cout << "U";
     cout << "\n";
 
-    return 0;
+
+  int f;
+  cout << "press any key to exit";
+  cin >> f;
+  return 0;
 }
 
 //Det her er kernen i algoritmen
@@ -72,7 +76,7 @@ void BubbleSort1::sort() {
     int j = 0;
 
     cout << "G";
-    for(i = 0; i < (size && switched); i++) {
+    for(i = 0; (i < size) && switched; i++) {
         cout << "H";
         switched = 0;
         for(j = 0; j < size - i; ){
