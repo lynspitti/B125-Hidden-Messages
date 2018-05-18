@@ -2,6 +2,7 @@
 \renewcommand{\baselinestretch}{1.20} 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{subcaption}
@@ -9,13 +10,19 @@
 \usepackage{xcolor}
 \usepackage{float}
 \usepackage{mdframed}
-\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+\usepackage{booktabs}
+
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
 \geometry{a4paper, total={170mm,237mm}, left=20mm, top=20mm}
 \setlength{\abovecaptionskip}{15pt plus 3pt minus 2pt}
 
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{\thepage}
+
 \begin{document}
-    
     %Title page
     \input{InteraktionsDesign/Docs/Titelpage.tex}
     
@@ -30,9 +37,6 @@
     
     % Questionnaire description
     \input{InteraktionsDesign/Docs/Questionnaire.tex}
-    
-    % Survey conduction
-    %\input{InteraktionsDesign/Docs/Conduction.tex}
     
     % Survey findings
     \newpage
@@ -49,7 +53,7 @@
     \input{InteraktionsDesign/Docs/Evaluation.tex}
     
     % Conclusion
-    \input{InteraktionsDesign/Docs/Conclusion.tex}
+    %\input{InteraktionsDesign/Docs/Conclusion.tex}
     
     \newpage
     % Appendix
