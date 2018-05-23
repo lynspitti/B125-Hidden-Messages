@@ -10,11 +10,18 @@
 
 // Other includes
 #include <QIODevice>
-#include <iostream>
 #include <QTimer>
 #include <QCoreApplication>
 #include <QDebug>
+
 #include <string>
+#include <vector>
+#include <fstream>
+#include <iostream>
+
+#include <receiver.h>
+#include <save.h>
+#include <data_struckt.h>
 
 using namespace std;
 QT_CHARTS_USE_NAMESPACE
@@ -31,43 +38,17 @@ QString commPort() {
     }
 }
 
-void receiveData(QString portName) {
-    QSerialPort serial;
-
-    serial.setPortName(portName);
-    serial.open(QIODevice::ReadOnly);
-    serial.setBaudRate(QSerialPort::Baud9600);
-    serial.setDataBits(QSerialPort::Data8);
-    serial.setParity(QSerialPort::NoParity);
-    serial.setStopBits(QSerialPort::OneStop);
-    serial.setFlowControl(QSerialPort::NoFlowControl);
-
-    if (!serial.isOpen()) {
-        qDebug() << serial.errorString() << "on port:" << portName;
-        qDebug() << "Please restart the program!";
-        while(true){}
-    } else {
-       qDebug() << "Serial opened!";
-       while (serial.isOpen()) {
-           if (!serial.waitForReadyRead(-1))
-               qDebug() << "error: " << serial.errorString();
-           else {
-               serial.waitForBytesWritten(5100);
-               QByteArray datas = serial.readAll();
-               while (serial.waitForReadyRead(10))
-                   datas += serial.readAll();
-               qDebug() << datas;
-           }
-       }
-       serial.close();
-   }
-}
-
 int main(int argc, char *argv[]) {
     QCoreApplication a(argc, argv);
     QString portName = commPort();
 
-    receiveData(portName);
+    Receiver receive;
+    Save_Handler save("D:\\Dev\\B125-Hidden-Messages\\Struktureret_System_Udvikling\\Workshop_2\\code\\qt");
+
+    while(1){
+        Data_Struct d = receive.receiveData(portName);
+        save.SaveData(d);
+    }
 
 
     /*

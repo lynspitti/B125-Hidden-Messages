@@ -1,5 +1,9 @@
-//#include "data_struckt.h"
-/*
+#ifndef DATA_STRUCKT_H
+#define DATA_STRUCKT_H
+
+#include <iostream>
+#include <vector>
+
 class Data_Struct{
   protected:
     int _Value;
@@ -60,4 +64,5 @@ class Humidity : public Data_Struct {
   Humidity(int Value, unsigned long TimeStamp): Data_Struct(Value,1,TimeStamp){
   }
 };
-*/
+
+#endif // DATA_STRUCKT_H
