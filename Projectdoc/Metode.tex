@@ -73,7 +73,7 @@ Selvom en komplet decentraliseret løsning lyder godt på papiret, så vil det u
     \item[-] Systemets bot netværk kan blive delvist eller helt lukket ned. Dette kan ske af mange forskellige grunde blandt andet ved brud på det sociale medies ToS (Terms of Service) eller ved en eventuel afsløring af hele systemet / projektet. 
     \item[-] Tredjeparten kan ændre deres API struktur på sådan vis at det fundamentale system ikke længere fungerer som tiltænkt.
     \item[-] At danne et ekstra lag af sikkerhed, ved anvendelse af krypteringsnøgler, vil være meget nemmere med en central løsning.[-] 
-    \item[-] Den decentrale løsning vil ikke kunne lukke alle brugernes tilgang på sammetid, da der ikke er nogen central database.
+    \item[-] Ved en decentral løsning vil ikke kunne lukke alle brugernes tilgang på sammetid, da der ikke er nogen central database.
     \item[-] Det vil kræve løbende opdatering af klienterne, at holde listen af aktive bots fuldt funktionel.
 \end{itemize}
 
@@ -83,8 +83,10 @@ Selvom en komplet decentraliseret løsning lyder godt på papiret, så vil det u
 % teknisk svær opgave
 
 \subsection{Sammenkobling af beskederne}
-
 - Hvordan kan vi skulle sammenkædnings nødvendig data i metadata?
+
+På projektets sikrede kommunikationsplatform vil det være nødvendigt at kunne finde sammenhængende beskeder og denne sammenkædning vil ikke kunne foregå på åbenlys vis på et socialt medie. I stedet kunne én mulighed være, at gemme sammenhængen i noget tilsyneladende uskyldig metadata, men som er genereret ud fra en prædefineret algoritme. Dette vil give den sikrede kommunikationsplatform noget specifikt at søge efter, uden at det vil være et let læseligt flag. Men hvad er metadata?\\\\
+Metadata kan grundlæggende defineres som data om data. Dermed kan det anvendes i mange sammenhænge. Et eksempel kunne være et billede. Dataen i et billede er i simpleste forstand lysintensiteter, i sort/hvid billeder, eller farver. Men udover denne data kunne man også gemme ting som dato, klokkeslet, GPS koordinater, navnet på ophavsmanden osv. Alt dette er eksempler på metadata som ikke påvirker indholdet, men som gør indholdet mere brugbart i mange forskellige sammenhænge. For eksempel vil vedhæftede søgeord gøre et billede galleri meget mere effektivt i at præsentere det ønskede materiale. Metadata kan både genereres automatisk af hardware/software systemer, men en bruger kunne også tilføre metadata manuelt.\\ Dette er især sandt på sociale medier hvor der kan findes en stor mængde af generelle søgeord. Netop det faktum at sociale medier tillader de enkelte brugere at skabe en varierende mængde af metadata for et hvert billede, sandsynliggør at systemet vil være i stand til at generere disse søgeord med en prædefineret algorimte for hver tråd på forummet. Dette vil så gøre det muligt at søge efter nye opslag på enhver forumstråd.
 
 \\\\
 \textbf{Privat beskeder}\\
@@ -132,8 +134,7 @@ En API protokol beskriver kun hvordan en given data forventes formateret, og ikk
 
 \subsubsection{Metadata}
 \label{Metadata}
-På projektets sikrede kommunikationsplatform vil det være nødvendigt at kunne finde sammenhængende beskeder og denne sammenkædning vil ikke kunne foregå på åbenlys vis på et socialt medie. I stedet kunne én mulighed være, at gemme sammenhængen i noget tilsyneladende uskyldig metadata, men som er genereret ud fra en prædefineret algoritme. Dette vil give den sikrede kommunikationsplatform noget specifikt at søge efter, uden at det vil være et let læseligt flag. Men hvad er metadata?\\\\
-Metadata kan grundlæggende defineres som data om data. Dermed kan det anvendes i mange sammenhænge. Et eksempel kunne være et billede. Dataen i et billede er i simpleste forstand lysintensiteter, i sort/hvid billeder, eller farver. Men udover denne data kunne man også gemme ting som dato, klokkeslet, GPS koordinater, navnet på ophavsmanden osv. Alt dette er eksempler på metadata som ikke påvirker indholdet, men som gør indholdet mere brugbart i mange forskellige sammenhænge. For eksempel vil vedhæftede søgeord gøre et billede galleri meget mere effektivt i at præsentere det ønskede materiale. Metadata kan både genereres automatisk af hardware/software systemer, men en bruger kunne også tilføre metadata manuelt.\\ Dette er især sandt på sociale medier hvor der kan findes en stor mængde af generelle søgeord. Netop det faktum at sociale medier tillader de enkelte brugere at skabe en varierende mængde af metadata for et hvert billede, sandsynliggør at systemet vil være i stand til at generere disse søgeord med en prædefineret algorimte for hver tråd på forummet. Dette vil så gøre det muligt at søge efter nye opslag på enhver forumstråd.
+
 
 
 
