@@ -1,8 +1,8 @@
 % I denne workshop er fokus lidt ændret fra tidligere Workshop. Dette er grundet at tidligere Workshop hovedsageligt havde fokus på projektets login funktionalitet og de dertilhørende usecases. Til denne workshop har gruppen dog vedtaget at det mere oplagt at videre specificere projektets andre dele, her tale om interaktion og implementering.
 
 \section{Indledning}
-Fokus er derfor nu på at beskrive hvordan kerne funktionaliteten af en sådan vejrstation kan implementeres, på en hensigtsmæssig måde.\\
-Implementationen af vejrstationen skal kunne en række ting. Én af de vigtige ting er, at koden skal kunne acceptere nye sensorer uden store ændringer i koden. Dette kræver en struktur som kan lagre et bredt antal af datatyper. Ydermere skal kommunikationen imellem microcontrolleren og PC-en også kunne operere uafhængigt af hvilken sensor som dataen oprindeligt kommer fra. Denne generalitet i design ligger op til at implementationen burde laves med objekt orienteret programmering. 
+Fokus er derfor nu på, at beskrive hvordan kerne funktionaliteten af en sådan vejrstation kan implementeres, på en hensigtsmæssig måde.\\
+Implementationen af vejrstationen skal kunne en række ting. Én af de vigtige ting er, at koden skal kunne acceptere nye sensorer, uden store ændringer i koden. Dette kræver en struktur som kan lagre et bredt antal af datatyper. Ydermere skal kommunikationen imellem microcontrolleren og PC-en også kunne operere uafhængigt af hvilken sensor som dataen oprindeligt kommer fra. Denne generalitet i design ligger op til at implementationen burde laves med objekt orienteret programmering. 
 
 \section{Klassediagram}
 \begin{figure}[H]
@@ -13,7 +13,7 @@ Implementationen af vejrstationen skal kunne en række ting. Én af de vigtige t
 \end{figure}
 
 \noindent
-Det overstående klassediagram [Figur \ref{fig:classdiagram}] viser implementationen af vejrstationen og dens kommunikation på tværs af klasserne. For overskueligheden skyld er klassediagrammet inddelt i tre generelle kategorier.
+Det overstående klassediagram [Figur \ref{fig:classdiagram}] viser implementationen af vejrstationen, og dens kommunikation på tværs af klasserne. For overskueligheden skyld er klassediagrammet inddelt i tre generelle kategorier.
 
 \subsection{Public}
 \begin{itemize}
@@ -54,7 +54,7 @@ Det overstående klassediagram [Figur \ref{fig:classdiagram}] viser implementati
     \textit{Communicator} klassen initialiseres ved en \textit{CommunicationPort} string som parameter. Parameteren beskriver hvor \textit{Communicator'en} skal lede efter Arduinoens data output. \textit{Communicator} metoden \textit{ReceiveData} henter dataen, i formatet fra \textit{DataStruct}, fra den angivne port.
     
     \item [-] \textbf{Display\_Handler} \hfill \\
-    \textit{Display\_Handler} har en privat attribut \textit{Container} som indeholder et array af \textit{DataContainer}. På denne måde kan den gemme flere sæt af data fra forskellige sensorer. Den har også en void metode som hedder \textit{DisplayData} som kaldes med en \textit{DataStruct}
+    \textit{Display\_Handler} har en privat attribut \textit{Container} som indeholder et array af \textit{DataContainer}. På denne måde kan den gemme flere sæt af data fra forskellige sensorer. Den har også en void metode som hedder \textit{DisplayData} som kaldes med en \textit{DataStruct} anvendt til at fremvise data for brugeren.
 \end{itemize}
 
 \section{Kommunikation mellem PC og microcontroller}
@@ -80,4 +80,4 @@ Denne opbygger en struktur, der generelt kan indeholde alle typer af Vejrstation
 % Hvordan kan man tilføre en ny sensor? Det kan man ved at lave en ny klasse som igen nedarver fra "Measurement_Module" med et nyt unikt type ID. Der udover skal PC siden også opdateres med hvordan denne nye type data skal fortolkes når den skal vises. Altså skal Display_Handleren også opdateres med håndteringen af den nye type data
 
 \section{Modularitet}
-Systemet er designet så yderligere sensorer kan integreres med mindst mulig ændring i koden. Hvis en ny sensor skulle integreres ville det være nødvendigt at oprette en ny klasse som nedarver fra \textit{Measurement\_Module}. Denne nye klasse vil så skulle læse data fra sensoren og sætte \textit{Type} variablen til et nyt unikt ID, eksempelvis 2, da 0 og 1 allerede er brugt. Den næste ændring vil være i \textit{Display\_Handler} klassen. Dette er nødvendigt for, at den kan display målingerne som værende fra denne nye sensor. Hvis ikke dette tilføjes, vil den blot modtage data med en ukendt \textit{Type}, vil den dermed ikke fungere.
+Systemet er designet så yderligere sensorer kan integreres med mindst mulig ændring i koden. Hvis en ny sensor skulle integreres, ville det derfor kun være nødvendigt at oprette en ny klasse, som nedarver fra \textit{Measurement\_Module}. Denne nye klasse vil så skulle læse data fra sensoren og sætte \textit{Type} variablen til et nyt unikt ID, eksempelvis 2, da 0 og 1 allerede er brugt. Den næste ændring vil være i \textit{Display\_Handler} klassen, for fremvisning af den nye data. Dette er nødvendigt for, at den kan display målingerne fra denne nye sensor da, hvis dette ikke tilføjes, vil programmet blot modtage data som en ukendt \textit{Type}, og ville dermed ikke fungere.
