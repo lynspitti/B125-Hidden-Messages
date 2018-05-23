@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "data_struckt.h"
+#include "data_struct.h"
 using namespace std;
 
 class Save_Handler {

@@ -16,12 +16,10 @@
 #include <fstream>
 #include <iostream>
 
-#include "data_struckt.h"
-using namespace std;
+#include "data_struct.h"
+//using namespace std;
 
-
-class Receiver
-{
+class Receiver {
     public:
         Data_Struct receiveData(QString portName);
     Receiver();

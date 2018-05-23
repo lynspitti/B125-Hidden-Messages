@@ -4,7 +4,6 @@ Receiver::Receiver(){}
 
 Data_Struct Receiver::receiveData(QString portName) {
     QSerialPort serial;
-
     serial.setPortName(portName);
     serial.open(QIODevice::ReadOnly);
     serial.setBaudRate(QSerialPort::Baud9600);
@@ -19,46 +18,35 @@ Data_Struct Receiver::receiveData(QString portName) {
         while(true){}
     } else {
        qDebug() << "Serial opened!";
-       //while (serial.isOpen()) {
-           if (!serial.waitForReadyRead(-1))
-               qDebug() << "error: " << serial.errorString();
-           else {
-               serial.waitForBytesWritten(5100);
-               QByteArray datas = serial.readAll();
-               while (serial.waitForReadyRead(100))
-                   datas += serial.readAll();
-               QString hello = datas;
+       if (!serial.waitForReadyRead(-1))
+           qDebug() << "error: " << serial.errorString();
+       else {
+           serial.waitForBytesWritten(5100);
+           QByteArray datas = serial.readAll();
+           while (serial.waitForReadyRead(100))
+               datas += serial.readAll();
+           QString hello = datas;
 
-               QRegExp rx("(\\#|\\!)");
-               QRegExp rx2("(\\_)");
+           QRegExp rx("(\\#|\\!)");
+           QRegExp rx2("(\\_)");
 
-               QStringList query = hello.split(rx);
+           QStringList query = hello.split(rx);
 
-               foreach (const QString &str, query) {
-                   if (str.size() != 0) {
-                       QStringList data = str.split(rx2);
+           foreach (const QString &str, query) {
+               if (str.size() != 0) {
+                   QStringList data = str.split(rx2);
+                   if (data.size() == 3){
+                       if (data.at(0).size() != 0 && data.at(1).size() != 0 && data.at(2).size() != 0) {
+                           int value = data.at(0).toInt();
+                           int type = data.at(1).toInt();
+                           unsigned long timeStamp = data.at(2).toLong();
 
-                       if (data.size() == 3){
-                           if(data.at(0).size() != 0 && data.at(1).size() != 0 && data.at(2).size() != 0) {
-                               int value = data.at(0).toInt();
-                               int type = data.at(1).toInt();
-                               unsigned long timeStamp = data.at(2).toLong();
-
-                               Data_Struct d(value, type, timeStamp);
-                               return d;
-                           }
+                           Data_Struct d(value, type, timeStamp);
+                           return d;
                        }
                    }
                }
-
-               //QString hello =  datas;
-               //QString output = hello.substr(1,hello.size() - 2);
-               // output = output.Trim('#');
-               qDebug() << query;
-
-               //return NULL;
            }
-       //}
-       serial.close();
+       }
    }
 }
