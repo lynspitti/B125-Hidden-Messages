@@ -4,38 +4,28 @@
 #include <iostream>
 #include <vector>
 
-class Data_Struct{
+class Data_Struct {
   protected:
     int _Value;
     int _Type;
     unsigned long _TimeStamp;
   public:
-    int GetValue(){
-      return _Value;
-    }
-    int GetType(){
-      return _Type;
-    }
-    unsigned long GetTime(){
-      return _TimeStamp;
-    }
-  Data_Struct(int Value,int Type,unsigned long TimeStamp){
-    _Value = Value;
-    _Type = Type;
-    _TimeStamp = TimeStamp;
-  }
+    int GetValue(){return _Value;}
+    int GetType(){return _Type;}
+    unsigned long GetTime(){return _TimeStamp;}
+  Data_Struct(int Value,int Type,unsigned long TimeStamp);
 };
 
-class DataContainer{
+class DataContainer {
   private:
     int _Type;
     std::vector<Data_Struct> Datas;
   public:
-    void AddData(Data_Struct Data){
+    void AddData(Data_Struct Data) {
       Datas.push_back(Data);
     }
-    int GetData(unsigned int position){
-      if (Datas.size() < position){
+    int GetData(unsigned int position) {
+      if (Datas.size() < position) {
         Data_Struct data = Datas.at(position);
         return data.GetValue();
       }
