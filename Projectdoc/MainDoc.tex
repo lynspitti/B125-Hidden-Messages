@@ -22,6 +22,7 @@
 \usepackage{wrapfig}
 \usepackage{float}
 \usepackage{url}
+\usepackage[numbib,nottoc]{tocbibind} % Tilføjer nummer på Appendix
 
 % Other
 \geometry{a4paper, total={170mm,237mm}, left=20mm, top=30mm}
@@ -109,8 +110,11 @@
     \newpage
     \input{Projectdoc/Kravspecifikation.tex}
     
-    % Metode
+    % Produkt beskrivelse
     \newpage
+    \input{Projectdoc/Produktbeskrivelse.tex}
+    
+    % Metode
     \input{Projectdoc/Metode.tex}
     
     % Implementation
@@ -131,7 +135,6 @@
     \bibliography{references}
     
     % Appendix
-    \newpage
-    \section{Appendix}
-    \input{Projectdoc/Appendix/Usecases.tex}
+    \input{Projectdoc/Bilag.tex}
+    
 \end{document}
