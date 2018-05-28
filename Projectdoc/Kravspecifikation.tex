@@ -21,45 +21,30 @@
 \subsubsection{Usecase: Send besked}
 \label{Hovedscenarie1}
 For forsendelse, af beskeder gennem produktet, vil brugeren skulle først udføre usecase \#1. "Login" [\ref{Usecase1_Login}]. Denne usecase vil registre brugeren til senere genkendelse, for f.eks. muligheden til redigering, eller at slette deres oprettede besked tråde eller enkelte posts. Brugeren kan dog også vælge at foretage en såkaldt anonym registration, hvor brugren ikke selv direkte sættes i sammenhæng med den postede besked, men i stedet er blevet formidlet igennem en fælles talsperson registreret af produktet selv. Efterfølgende vil brugeren skulle udføre usecase \#2. "Send message" [\ref{Usecase2_Send_Message}], hvor brugeren blandt andet vil få mulighed for at vælge f.eks. en specifik sammenhæng hvori brugerens besked vil blive kædet sammen. Det bagved læggende system vil håndtere kryptering af beskedens tekst, og dens indarbejdelse i en steganografisk sammenhæng, og vil efterfølgende også gennem API strukturer, udgive den nedskrevne besked til det aktuelle sociale medie. For uddybende beskrivelse se appendix: [\ref{Usecase2_Send_Message}]
+
 \subsubsection{Usecase: Se beskeder}
 \label{Hovedscenarie2}
 For fremvisning af beskeder i produktet, vil brugeren som i forgående hovedscenarie [\ref{Hovedscenarie1}] først skulle udføre usecase \#1. "Login". Efter denne skal brugeren gennemgå usecase \#3 "View message" [\ref{Usecase3_View_Message}], hvor brugeren vil blive præsenteret med muligheden for at vælge, først en specifik tråd, hvori der kan forekomme en række af flere enkelte beskeder, og efterfølgende f.eks. en længere enkelt stående tekst besked.
 Selvfølgelig er denne omtalte tråd og tekst repræsentation ikke fremvist under steganografi, men er blevet bearbejdet af systemet til at være læselig.
 Endvidere under disse fremvisninger, kan en bruger også vælge at slette en besked eller hele tråde, såfremt at brugeren har registreret ejerskab over disse. For uddybende beskrivelse se appendix: [\ref{Usecase3_View_Message}]
 
-% \subsection{Krav til produktet}
-% \begin{itemize}
-%     \subsubsection{Funktionelle krav}
-%     \begin{itemize}
-%         \item Systemet skal kunne sende beskeder/indlæg.
-%         \item Systemet skal kunne vise beskeder/indlæg.
-%         \item Beskeder skal lagres på et socialt medie.
-%         \item Lagrede beskeder skal være skjult via steganografi.
-%         \item Systemet skal foretage kommunikationen anonymt.
-%         \item Det må ikke forekomme indstillinger der påvirker brugernes sikkerhed.
-%     \end{itemize}
-%     \subsubsection{Ikke-funktionelle krav}
-%     \begin{itemize}
-%         \item Brugere skal kunne slette tidligere sendte beskeder.
-%         \item Beskeder skal kunne kædes i længere sammenhæng.
-%         \item 80\% af testbrugerne skal kunne navigere systemet uden yderligere instruktioner.
-%         \item Systemet må ikke udelukkende sikres med steganografi.
-%     \end{itemize}  
-% \end{itemize}
-
 \subsection{Krav til produktet}
-\begin{enumerate}
-  \subsubsection{Funktionelle krav}
-    \item Systemet skal kunne sende beskeder/indlæg.
-    \item Systemet skal kunne vise beskeder/indlæg.
-    \item Beskeder skal lagres på et socialt medie.
-    \item Lagrede beskeder skal være skjult via steganografi.
-    \item Systemet skal foretage kommunikationen anonymt.
-    \item Der må ikke forekomme indstillinger der påvirker brugernes sikkerhed.
-  \subsubsection{Ikke-funktionelle krav}
-    \item Brugere skal kunne slette tidligere sendte beskeder.
-    \item Beskeder skal kunne kædes i længere sammenhæng.
-    \item 80\% af testbrugerne skal kunne navigere systemet uden yderligere instruktioner.
-    \item Det skal være tydeligt for mindst 80\% af testbrugerne, at deres kommunikation er sikkert.
-    \item Systemet må ikke udelukkende sikres med steganografi.
+\textit{Systemet indeholder: Kommunikationsplatformen og dens servere}
+\begin{enumerate}[label=\textbf{Krav. \arabic*},leftmargin=.85in]
+    \subsubsection{Funktionelle krav}
+    \label{funktion}
+    \item \label{k:send} Systemet skal kunne sende beskeder/indlæg.
+    \item \label{k:vise} Systemet skal kunne vise beskeder/indlæg.
+    \item \label{k:lagre} Beskeder skal lagres på et socialt medie.
+    \item \label{k:stegano} Lagrede beskeder skal være skjult via steganografi.
+    \item \label{k:anonymt} Systemet skal foretage kommunikationen anonymt.
+    \item \label{k:indstil} Der må ikke forekomme indstillinger der påvirker brugernes sikkerhed.
+    \subsubsection{Ikke-funktionelle krav}
+    \label{ikke-funktion}
+    \item \label{k:slette} Brugere skal kunne slette tidligere sendte beskeder.
+    \item \label{k:sammen} Beskeder skal kunne kædes i længere sammenhæng.
+    \item \label{k:naviger} 80\% af testbrugerne skal kunne navigere systemet uden yderligere instruktioner.
+    \item \label{k:sikker} Det skal være tydeligt for mindst 80\% af testbrugerne, at deres kommunikation er sikker.
+    \item \label{k:krypto} Systemet må ikke udelukkende sikres med steganografi.
+    \item \label{k:load} Systemet må ikke tage mere end 10 sekunder om at indlæse en indlægsoversigt.
 \end{enumerate}
