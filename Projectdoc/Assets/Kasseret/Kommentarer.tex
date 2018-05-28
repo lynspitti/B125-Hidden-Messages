@@ -4,3 +4,51 @@
 %I dette eksempel er f.eks. ikke videre beskrevet hvordan, eller om systemet overhovedet skal, håndtere denne databases placering eller tilgang, efter en eventuel spærring fra tredjeparter, der f.eks. kunne anse systemet for at understøtte maliciøse aktiviteter.\\
 %Efter denne login aktivitet ses hovedmenuen, hvorfra brugerne kan vælge at f.eks. tilgå systemets indstillinger, danne en ny besked, eller hente tidligere beskeder og tråde. Denne lægger også op til et andet dilemma omhandlende hvordan systemet, uden at skabe en større række af mistænkelige forespørgsler, skal kunne genkende, hente, og sammekæde flere beskeder på op til flere mulige brugere kontoer, hvilket efter simple normale requests vil kræve op til måske flere hundrede transmissioner per request.\\
 %Senere i dette afsnit vil disse føromtalte dilemmaer såvel som, teorier og tanker blandt andre blive videre redegjort for, med henblik på at skabe et endeligt oplæg til en række tekniske læsningsforslag.
+
+
+
+%\section{System design}
+%I dette afsnit vil det blive analyseret og diskuteret hvordan systemet skal designes, ud fra hvordan kravspecifikationen bedst muligt vil blive opfyldt. Koncepterne bag mange af de teknologier, der gør systemet muligt vil også blive belyst. Problematikkerne samt dilemmaerne, som rejser sig under system designs processen skaber strukturen i afsnittet, og leder op imod det samlede forslag til et system.
+
+% \subsection{Central eller decentral løsning}
+% Ud fra kravspecifikationen bliver systemet pålagt at være sikkert, men samtidig også at køre med en fornuftig indlæsnings tid. Disse krav kan modarbejde hinanden på flere forskellige måder, blandt andet i spørgsmålet om, om systemet skal køre centralt eller decentralt.
+% \\\\
+% Hvis man har spørgsmålet med optimal indlæsnings tid i mente, vil en central løsning med en server der lagrer stien til alle beskeder i systemet være favorabel. Dette gør enheder der tilgår den centrale database i stand til at forespørge og efterfølgende finde opslag meget hurtigt, da databasen har kortlagt alle relevante opslag. Dette står i modsætning til en decentral løsning, hvor brugernes enhed selv skal søge efter de relevante opslag. Den søgning kræver samtlige server anmodninger på hvert enkelt enhed, da den centrale kortlægning ikke er tilgængelig. De mange anmodninger vil resultere i længere indlæsnings tid.
+
+% %Før værende billede sikkerhed
+
+% En central server trods dens eventuelle positive egenskaber, kan dog også udgøre et sikkerhedshul, hvis denne server ikke er sikret tilstrækkeligt. Med andre ord lægger dette en systemvedligeholdelses byrde på dem der administrerer systemet. F.eks. kunne en sådan server, (Illustreret ved [Figur \ref{fig:central_server}]), lække generelle lagerede informationer, eller ligefrem blive overvåget for kommunikation, samt blive spærret som en helhed. Dette vil selvfølgelig også kunne ske for den enkelte bruger [Figur \ref{fig:decentral_server}], men disse blokeringer ville i sådanne tilfælde også kun påvirke den enkelte, og ikke systemet som en helhed.
+% Hermed har begge løsninger gode og dårlige elementer. Derfor vil forskellige aspekter af kommunikationsplatformen blive videre diskuteret for at kunne finde et kompromis mellem helt centraliseret og helt decentraliseret.
+
+% %Før værende billede Centralice
+
+% For at kunne opretholde en mængde af bots, her forstået som anonyme brugere på sociale medier genereret af systemet, der har til opgave at sikre anonymitet for brugeren på kommunikationsplatformen, vil det være nødvendigt at kunne tilføje nye bots til netværket løbende, samt opdatere status af nuværende bots. Dette er nødvendigt da det kunne formodes at ejerne af det relevante sociale medie ikke ønsker systematisk genereret anonyme brugere på deres platform, specielt hvis de er associeret med en potentielt mistænkelig opførelse. 
+% % 
+% For at systemet kan fungere, skal systemet vide hvilke bots der er tilgængelige på et hvert tidspunkt. Én mulig måde at holde styr på disse informationer kunne være, som illustreret ved [Figur \ref{fig:CentralDatabaseList}], en database opdateret med information om de enkelte bots på de sociale medier. Databasen kan lagre om de stadigvæk er aktive, eller om de er blevet banlyst af det sociale medie, f.eks. for ikke at være en "normal" bruger. Hvis en given bot så blev lukket ned, ville den opdaterede database, gøre enhver bruger i stand til blot at vælge en anden bot. Denne løsning tilfører dog et element, en database, som vil være et kritisk led for, at tilbyde yderligere anonymitet til brugeren. Hvis denne database så ikke er tilgængelig, vil denne funktionalitet være hindret, i det at bots vil kunne blive taget ned i mellemtiden, uden at brugeren ville vide det, da dette sker før brugeren får en fejlmeddelelse.\\ 
+% Et værre scenarie forestilles ved kompromitteringen af denne database, der vil gøre det muligt for uvedkommende at læse beskederne sendt igennem systemet. Dette scenarie vil især være vigtigt for sikkerheden, hvis der er anvendt kryptering af beskedernes tekst, som en ekstra form for sikkerhed. Disse krypteringsnøgler vil i sådanne tilfælde skulle gemmes et sikkert sted, uden denne fare for kompromittering, men stadig et sted hvor alle de egentlige bruger kan få fat i dem.\\ 
+% En måde hvorpå man kunne sikre systemet under en central server, er ved at holde sammenkædningsfunktionaliteten på serveren. Hvis serveren så ikke er tilgængelig, vil det være meget tidskrævende at finde de billeder som indeholder beskederne, da billederne som. Efter disse billeder så er fundet, vil det så også kræve krypteringsnøglerne som kunne være gemt i kildekoden. På denne måde kunne en central servers nedbrud hindre brugere, såvel som uvedkommende, i at tilgå beskederne i systemet.
+
+% Som løsning på dette, kunne man opstille databasen, så den kun kontaktes af brugerne der skal opdatere deres bot informations liste. Dette vil mindske trafikken imellem databasen og klienterne, og derved vil dens opmærksomhed være mindre.\\
+% % 
+% Man kunne også forestille sig en ekstra database, som illustreret ved [Figur \ref{fig:MainDomain}], der kun vil blive kontaktet hvis den primære er inaktiv, og at denne database kender til andre databaser, der opererer som backups af den primære. Denne opbygning vil gøre det meget svært at lukke systemet i længere tid. På den anden side vil denne opsætning også kræve mere hardware og mere vedligehold i form af synkronisering, opdatering osv. Dermed vil en opsætning af en sådan backup koste systemadministratoren mere arbejdstid, og vil derfor kræve en vurdering af, om opsætningen er investeringen værd.\\
+% % 
+% En måde at undgå dette databaseproblem, er at lade hver klient have en lokal liste over aktive bots, som illustreret ved [Figur \ref{fig:DeviceOpdate}]. Denne liste vil så med jævne intervaller blive opdateret igennem klient opdateringer. Med denne fremgang er det tænkeligt, at systemet vil kræve mange opdateringer, eller at der ofte vil være et antal utilgængelige bots på listen, i denne illustration vist ved de stiplede linjer.
+% \\\\
+% Som førnævnt vil et centraliseret system betyde at hele systemet vil hvile på en node, hvilket vil betyde at en angriber blot skal tage et led ud for at kollapse hele systemet. 
+% En måde hvorpå man kunne sikre systemet under en central server, er ved at holde sammenkædningsfunktionaliteten på serveren. Hvis serveren så ikke er tilgængelig, vil det være meget tidskrævende at finde de billeder som indeholder beskederne. Efter disse billeder så er fundet, vil det så også kræve krypteringsnøglerne som kunne være gemt i kildekoden. På denne måde kunne en central servers nedbrud hindre brugere, såvel som uvedkommende, i at tilgå beskederne i systemet. lagre krypteringsnøgler på serveren, der skal hentes for at kunne læse en besked. Denne centrale server bliver det eneste led som en ondsindet angriber skal lægge ned, for at gøre hele platformen ubrugelig. Dette vil faktisk sikre brugerne, såfremt angriberen ikke kompromitterer krypteringsnøglerne. Brugernes beskeder vil være ulæselige for en angriber uden de krypteringsnøgler. Dette kan sammenlignes med en indbygget selvdestruktion af systemet.\\
+% % Et centraliseret system kan altså altid opdateres løbende, i modsætning til den decentraliseret løsning hvor brugerne enten er fastlåst med software der potentielt er defekt eller skal hentes på ny. Løbende opdateringer til systemet er essentielle når det sociale netværks bot konti, ikke fungerer som tiltænkt. Dette kan ske på mange forskellige måder: Blandt andet kan de enkelte bots blive taget ned for mistanke for falsk bruger, eller netværket kunne ændre sin struktur fra en ene dag til den anden. Muligheden for løbende opdatering er også essentiel ved en mulig skalering af systemet, blandt andet når systemets netværk af bots ikke kan betjene en voksende brugerbase, eller når denne brugerbase ændrer behov der kræver at det fundamentale system gennemgår strukturel redesign.
+% \\\\
+% \textbf{Samlet løsning}\\
+% Selvom en komplet decentraliseret løsning lyder godt på papiret, så vil det udløse så mange fundamentale problemer at systemet vil være bøvlet og potentielt ubrugeligt. Da systemet afhænger så kraftigt af en trejdeparts service, så vil små ændringer, så som disse, gøre systemet ubrugeligt:
+% \begin{itemize}
+%     \item[-] Systemets bot netværk kan blive delvist eller helt lukket ned. Dette kan ske af mange forskellige grunde blandt andet ved brud på det sociale medies ToS (Terms of Service) eller ved en eventuel afsløring af hele systemet / projektet. 
+%     \item[-] Tredjeparten kan ændre deres API struktur på sådan vis at det fundamentale system ikke længere fungerer som tiltænkt.
+% \end{itemize}
+
+% indstilling til automatisk genereret anonyme konti
+% Håndtering af billeder (formatering af indhold)
+
+% Forklar: Det er kriterier for at kunne udføre alle funktioner
+% Valget af Instagram som en leverandør
+% Hvad kræver det konkrete af et socialt medie at supportere denne løsning
+% Her kunne nævnes, billedeupload, ingen kompression af billedeupload, en hvis offentlig metadata tilgængelig via API...

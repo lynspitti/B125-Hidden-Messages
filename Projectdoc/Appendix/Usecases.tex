@@ -30,14 +30,16 @@
         \end{enumerate}
     \end{enumerate} \\
     Variationer & 
-    - \\
+    \begin{itemize}
+        \item Loginfunktionen kan foretages ved hjælp af systemets egne bot konti eller ved hjælp af egen konto.
+    \end{itemize} \\
     Issues &
+    Følgende potentielle problemer med denne usecase:
     \begin{itemize}
         \item Hele loginfunktionen er afhængig af en tredjepart. Hvilket kan have effekt på oppetid og adgang.
     \end{itemize} \\
-    Ikke-funktionelle krav & 
-    -
 \end{tabular}
+\newpage
 \subsubsection{Usecase 2: Send message \label{Usecase2_Send_Message}}
 \begin{tabular}{@{}p{3.5cm}@{}p{13cm}@{}}
     Usecase funktion & 
@@ -64,12 +66,14 @@
     Variationer & 
     - \\
     Issues &
+    Følgende potentielle problemer med denne usecase:
     \begin{itemize}
         \item Brugeren har mistet sin forbindelse.
     \end{itemize}\\
     Ikke-funktionelle & 
     -
 \end{tabular}
+\newpage
 \subsubsection{Usecase 3: View message \label{Usecase3_View_Message}}
 \begin{tabular}{@{}p{3.5cm}@{}p{13cm}@{}}
     Usecase funktion & 
@@ -80,7 +84,7 @@
     Det antages at:
     \begin{itemize}
         \item Brugeren har gennemført usecase \#1. "Login".
-        \item usecase #2. "Send message" tidligere har været udført, inden for den aktuelle brugeres tilgang og rettigheder til display af beskeder.
+        \item usecase \#2. "Send message" tidligere har været udført, inden for den aktuelle brugeres tilgang og rettigheder til display af beskeder.
     \end{itemize}\\
     Aktøre & 
     \textbf{Modtager} \\
@@ -91,10 +95,12 @@
     Variationer & 
     - \\
     Issues &
+    Følgende potentielle problemer med denne usecase:
     Brugeren har mistet sin forbindelse. \\
     Ikke-funktionelle & 
     -
 \end{tabular}
+\newpage
 \subsubsection{Usecase 4: Delete message\label{Usecase4_Delete_Message}}
 \begin{tabular}{@{}p{3.5cm}@{}p{13cm}@{}}
     Usecase funktion & 
@@ -115,7 +121,8 @@
     \end{enumerate} \\
     Variationer & 
     - \\
-    Issues & 
+    Issues &
+    Følgende potentielle problemer med denne usecase:
     \begin{itemize}
         \item Brugeren har mistet sin forbindelse.
     \end{itemize}\\
