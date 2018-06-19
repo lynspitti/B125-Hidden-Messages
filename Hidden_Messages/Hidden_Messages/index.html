@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>TypeScript HTML App</title>
+        <link rel="stylesheet" href="app.css" type="text/css" />
+        <script src="app.js"></script>
+
+        <!-- Globals -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <script type="text/javascript" src="Scripts/sjcl.js"></script>
+
+
+        <!-- Project_Hidden_Message references -->
+        <script src="Scripts/Picture_Stenography.js"></script>
+        <script src="/Scripts/Instagram.js"></script>
+    </head>
+    <body>
+
+        <p>Content goes here</p>
+
+        <input id="Login_Bnt" type="button" value="Instagram Login" onclick="login();" />
+        
+        Image Path:<br>
+        <input type="text" name="ImgPath" value="">
+        <br>
+        Message Text:<br>
+        <input type="text" name="MsgTxt" value="Test Text">
+        <br><br>
+        <input type="button" value="Upload" onclick="DoUpload();">
+
+        <img id="Preview" src="" />
+        <img id="Encoded" src="" />
+
+        <br>
+        Decoded Message Text:<br>
+        <label id="Decoded_Message"></label>
+
+        <img id="ItemPreview" src="" />
+        
+
+    </body>
+</html>
